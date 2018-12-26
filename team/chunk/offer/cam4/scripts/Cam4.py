@@ -56,10 +56,10 @@ def web_Submit(submit):
     try:
         chrome_driver.find_element_by_xpath("//*[@id='paymentForm']/a/span").click()
     except:
+        chrome_driver.save_screenshot('../png/'+submit['name']+'.png')
         chrome_driver.close()
         chrome_driver.quit()
         print('form not ok')
-        chrome_driver.save_screenshot('../png/'+submit['name']+'.png')
         return 'fail',''
     # print(chrome_driver.page_source)
     status = 'fail'
@@ -72,8 +72,8 @@ def web_Submit(submit):
         chrome_driver.save_screenshot('../png/'+submit['name']+'.png')
         chrome_driver.close()
         chrome_driver.quit()
-        submit['name'] = ng.gen_one_word_digit(lowercase=False)
-        status,submit['name'] = web_Submit(submit)
+        # submit['name'] = ng.gen_one_word_digit(lowercase=False)
+        # status,submit['name'] = web_Submit(submit)
 
     return status,submit['name']
 
@@ -155,13 +155,13 @@ while i <= rows-1:
                 print('this email not checked')
                 sheet2.write(i+1,6,'email not in function')
         else:
-            print('fail to commit')
-            sheet2.write(i+1,6,'email not in function')
+            print('fail to register')
+            sheet2.write(i+1,6,'register failed')
     except:
         print('failed')
         sheet2.write(i+1,6,'email commit failed')
     finally:
-        book2.save('C:/cam4/config/c4mconfig.xlsx')
+        book2.save('..\config\c4mconfig.xlsx')
         print('成功保存')
         i = i + 1
 
