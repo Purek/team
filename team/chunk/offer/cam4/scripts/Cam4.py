@@ -97,6 +97,7 @@ while i <= rows-1:
     submit['email_pwd'] = sheet.cell(i+1,3).value
     submit['email_assist'] = sheet.cell(i+1,4).value
     submit['ua'] = sheet.cell(i+1,5).value
+    submit['site'] = sheet.cell(1,7).value
     submit['status'] = ''
     book2 = copy(workbook)
     sheet2 = book2.get_sheet(0)
