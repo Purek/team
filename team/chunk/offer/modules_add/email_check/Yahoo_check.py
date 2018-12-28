@@ -15,10 +15,11 @@ import os
 
 
 
-def Yahoo_Check(submit,str_1,str_2):
+def Yahoo_Check1(submit,str_1,str_2):
     # path='../driver'
     # executable_path=path
     options = webdriver.ChromeOptions()
+    options.add_argument('--incognito')
     prefs = {"profile.managed_default_content_settings.images":2}
     options.add_experimental_option("prefs",prefs)
     chrome_driver = webdriver.Chrome(chrome_options=options)
@@ -42,6 +43,9 @@ def Yahoo_Check(submit,str_1,str_2):
         [a.click() for a in list1 if "Cam4" in str(a.get_attribute('innerHTML'))]
     except:
         print('........')
+
+
+
     try:
         chrome_driver.maximize_window()
         if chrome_driver.find_element_by_link_text('Verify Your Account'):
@@ -81,6 +85,87 @@ def Yahoo_Check(submit,str_1,str_2):
             chrome_driver.close()
             chrome_driver.quit()
             return 0
+
+def Yahoo_Check(submit,str_1,str_2):
+    path='../driver'
+    executable_path=path
+    options = webdriver.ChromeOptions()
+    options.add_argument('--incognito')
+    # prefs = {"profile.managed_default_content_settings.images":2}
+    # options.add_experimental_option("prefs",prefs)
+    chrome_driver = webdriver.Chrome(chrome_options=options)
+    print('preparing...')
+    chrome_driver.implicitly_wait(10)  # 最长等待8秒
+    print('getting site...')
+    chrome_driver.get("https://login.yahoo.com/?.src=ym&lang=&done=https%3A%2F%2Fmail.yahoo.com%2F")
+    # chrome_driver.get("https://www.google.com")
+    print('loading finished...')
+    # 登陆
+
+    chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
+    sleep(3)
+    chrome_driver.find_element_by_id('login-signin').click()
+    sleep(2)
+    chrome_driver.find_element_by_id('login-passwd').send_keys(submit['email_pwd'])
+    sleep(2)
+    chrome_driver.find_element_by_id('login-signin').click()
+    sleep(5)
+    list0 = chrome_driver.find_elements_by_tag_name("button")
+    try:
+        [a.click() for a in list0 if "Done" in str(a.get_attribute('innerText'))]
+    except:
+        print('meiyou done biaoqian')
+    list1 = chrome_driver.find_elements_by_tag_name("a")
+    try:
+        [a.click() for a in list1 if "Cam4" in str(a.get_attribute('innerHTML'))]
+    except:
+        print('........')
+    try:
+        chrome_driver.maximize_window()
+        if chrome_driver.find_element_by_link_text('Verify Your Account'):
+            chrome_driver.find_element_by_link_text('Verify Your Account').click()
+            rantime = random.randint(1,3)
+            sleep(rantime*60)
+            chrome_driver.close()
+            chrome_driver.quit()
+            return 1
+    except:
+        print("can't find verify button")
+        # spam
+        try:
+            try:
+                chrome_driver.find_element_by_link_text('More').click()
+            except:
+                print('no more')
+            chrome_driver.find_element_by_link_text('Spam').click()
+            list3 = chrome_driver.find_elements_by_class_name("o_h")
+            try:
+                [a.click() for a in list3 if "Cam4" in str(a.get_attribute('innerText'))]
+            except:
+                print('===========')
+            try:
+                chrome_driver.maximize_window()
+                if chrome_driver.find_element_by_link_text('Verify Your Account'):
+                    chrome_driver.find_element_by_link_text('Verify Your Account').click()
+                    rantime = random.randint(1,3)
+                    sleep(rantime*60)
+                    chrome_driver.close()
+                    chrome_driver.quit()
+                    return 1
+            except:
+                print("can't find verify button")
+                # sleep(5)
+                chrome_driver.close()
+                chrome_driver.quit()
+                return 0
+        except:
+            print('inbox not found')
+            chrome_driver.close()
+            chrome_driver.quit()
+            return 0
+
+
+
 if __name__=='__main__':
     submit={}
     submit['email'] = 'doyle.cornelia@yahoo.com'

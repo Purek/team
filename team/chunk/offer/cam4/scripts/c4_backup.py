@@ -193,8 +193,9 @@ def email_Check_yahoo(submit):
     path='../driver'
     executable_path=path
     options = webdriver.ChromeOptions()
-    prefs = {"profile.managed_default_content_settings.images":2}
-    options.add_experimental_option("prefs",prefs)
+    options.add_argument('--incognito')
+    # prefs = {"profile.managed_default_content_settings.images":2}
+    # options.add_experimental_option("prefs",prefs)
     chrome_driver = webdriver.Chrome(chrome_options=options)
     print('preparing...')
     chrome_driver.implicitly_wait(10)  # 最长等待8秒
