@@ -30,9 +30,17 @@ def web_Submit(submit):
     print('preparing...')
     chrome_driver.implicitly_wait(10)  # 最长等待8秒
     print('getting site...')
-
     chrome_driver.get("http://click.prodailyfinance.com/click.php?c=1&key=02q01o3378537qrqy3s9clei")
-    print('loading finished...')
+    i = 0
+    while i <=3:
+        try:
+            chrome_driver.find_element_by_xpath("/html/body/div[1]/div[1]/div/div[1]").click()      #18+
+            print('loading finished...')
+            break
+        except:
+            chrome_driver.get("http://click.prodailyfinance.com/click.php?c=1&key=02q01o3378537qrqy3s9clei")
+            sleep(5)
+            i = i + 1   
     try:
         chrome_driver.find_element_by_xpath("/html/body/div[1]/div[1]/div/div[1]").click()      #18+
     except:
