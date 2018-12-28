@@ -16,8 +16,8 @@ import os
 
 
 def Yahoo_Check(submit,str_1,str_2):
-    path='../driver'
-    executable_path=path
+    # path='../driver'
+    # executable_path=path
     options = webdriver.ChromeOptions()
     prefs = {"profile.managed_default_content_settings.images":2}
     options.add_experimental_option("prefs",prefs)

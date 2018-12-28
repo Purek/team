@@ -17,8 +17,8 @@ import random
 
 
 def Gmail_Check(submit,str_1,str_2):
-    path='../driver'
-    executable_path=path
+    # path='../driver'
+    # executable_path=path
     options = webdriver.ChromeOptions()
     options.add_argument('--incognito')
     # ua = submit['ua']

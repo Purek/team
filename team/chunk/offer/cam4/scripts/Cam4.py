@@ -19,8 +19,8 @@ import os
 import datetime
 
 def web_Submit(submit): 
-    path='../driver'
-    executable_path=path
+    # path='../driver'
+    # executable_path=path
     options = webdriver.ChromeOptions()
     options.add_argument('--incognito')
     ua = submit['ua']
