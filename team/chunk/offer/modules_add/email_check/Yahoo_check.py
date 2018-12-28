@@ -12,7 +12,7 @@ from time import sleep
 # from name_get import name_get as ng
 import re
 import os
-
+import random
 
 
 def Yahoo_Check1(submit,str_1,str_2):
@@ -124,7 +124,7 @@ def Yahoo_Check(submit,str_1,str_2):
         chrome_driver.maximize_window()
         if chrome_driver.find_element_by_link_text('Verify Your Account'):
             chrome_driver.find_element_by_link_text('Verify Your Account').click()
-            rantime = random.randint(1,3)
+            rantime = random.randint(2,4)
             sleep(rantime*60)
             chrome_driver.close()
             chrome_driver.quit()
@@ -154,12 +154,14 @@ def Yahoo_Check(submit,str_1,str_2):
                     return 1
             except:
                 print("can't find verify button")
+                chrome_driver.save_screenshot(submit['name']+'.png')
                 # sleep(5)
                 chrome_driver.close()
                 chrome_driver.quit()
                 return 0
         except:
             print('inbox not found')
+            chrome_driver.save_screenshot(submit['name']+'.png')
             chrome_driver.close()
             chrome_driver.quit()
             return 0

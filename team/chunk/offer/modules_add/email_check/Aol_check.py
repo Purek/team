@@ -10,6 +10,7 @@ from time import sleep
 # from name_get import name_get as ng
 import re
 import os
+import random
 
 
 
@@ -61,7 +62,8 @@ def Aol_Check(submit,str_1,str_2):
             chrome_driver.maximize_window()
             if chrome_driver.find_element_by_link_text(str_2):
                 chrome_driver.find_element_by_link_text(str_2).click()
-                sleep(15)
+                rantime = random.randint(3,5)
+                sleep(rantime)   
                 chrome_driver.close()
                 chrome_driver.quit()
                 return 1
@@ -81,18 +83,21 @@ def Aol_Check(submit,str_1,str_2):
                 chrome_driver.maximize_window()
                 if chrome_driver.find_element_by_link_text(str_2):
                     chrome_driver.find_element_by_link_text(str_2).click()
-                    sleep(15)
+                    rantime = random.randint(3,5)
+                    sleep(rantime)   
                     chrome_driver.close()
                     chrome_driver.quit()
                     return 1
             except:
                 print("can't find verify button")
+                chrome_driver.save_screenshot(submit['name']+'.png')
                 # sleep(5)
                 chrome_driver.close()
                 chrome_driver.quit()
                 return 0
     except:
         print(' not found in inbox')
+        chrome_driver.save_screenshot(submit['name']+'.png')
         # chrome_driver.close()
         # chrome_driver.quit()
         return 0
