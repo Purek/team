@@ -26,6 +26,7 @@ def ip_new(city):
 # city如果是'',则从us全国获取ip,否则用指定的city去获取ip
 def ip_Test(city): 
     ip_new(city)
+    sleep(5)
     # path='C:/cam4/driver'
     # executable_path=path
     options = webdriver.ChromeOptions()
