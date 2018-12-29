@@ -77,7 +77,7 @@ def Gmail_Check(submit,str_1,str_2):
         [a.click() for a in list1 if str_1 in str(a.get_attribute('innerText'))]
         try:
             chrome_driver.find_element_by_link_text(str_2).click()
-            rantime = random.randint(1,3)
+            rantime = random.randint(10,15)
             sleep(rantime*60)
             chrome_driver.close()
             chrome_driver.quit()
@@ -104,7 +104,7 @@ def Gmail_Check(submit,str_1,str_2):
                             print('bbbbbbbbbbbbbbb')
                             # chrome_driver.find_element_by_link_text(str_2).click()
                             print('ccccccccccccccc')
-                            rantime = random.randint(2,6)
+                            rantime = random.randint(10,15)
                             sleep(rantime*60)
                             chrome_driver.close()
                             chrome_driver.quit()

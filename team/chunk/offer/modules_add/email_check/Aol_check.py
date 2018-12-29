@@ -71,7 +71,7 @@ def Aol_Check(submit,str_1,str_2):
             sleep(5)
             if chrome_driver.find_element_by_link_text(str_2):
                 chrome_driver.find_element_by_link_text(str_2).click()
-                rantime = random.randint(3,5)
+                rantime = random.randint(10,15)
                 sleep(rantime*60)   
                 chrome_driver.close()
                 chrome_driver.quit()
@@ -93,7 +93,7 @@ def Aol_Check(submit,str_1,str_2):
                 sleep(5)
                 if chrome_driver.find_element_by_link_text(str_2):
                     chrome_driver.find_element_by_link_text(str_2).click()
-                    rantime = random.randint(3,5)
+                    rantime = random.randint(10,15)
                     sleep(rantime*60)   
                     chrome_driver.close()
                     chrome_driver.quit()

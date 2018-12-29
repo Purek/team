@@ -28,9 +28,10 @@ def web_Submit(submit):
     options.add_argument('user-agent="%s"' % ua)
     chrome_driver = webdriver.Chrome(chrome_options=options)
     print('preparing...')
-    chrome_driver.implicitly_wait(10)  # 最长等待8秒
+    chrome_driver.implicitly_wait(20)  # 最长等待8秒
     print('getting site...')
-    chrome_driver.get("http://click.prodailyfinance.com/click.php?c=1&key=02q01o3378537qrqy3s9clei")
+    # chrome_driver.get("http://click.prodailyfinance.com/click.php?c=1&key=02q01o3378537qrqy3s9clei")
+    chrome_driver.get(submit['site'])
     i = 0
     while i <=3:
         try:
@@ -38,7 +39,7 @@ def web_Submit(submit):
             print('loading finished...')
             break
         except:
-            chrome_driver.get("http://click.prodailyfinance.com/click.php?c=1&key=02q01o3378537qrqy3s9clei")
+            chrome_driver.get(submit['site'])
             sleep(5)
             i = i + 1   
     try:
@@ -74,6 +75,8 @@ def web_Submit(submit):
     sleep(3)
     if chrome_driver.page_source.find('Please verify your email address to complete your registration') != -1:
         status = 'success'
+        rantime = random.randint(3,5)
+        sleep(rantime*60)  
         chrome_driver.close()
         chrome_driver.quit()
     else:

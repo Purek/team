@@ -24,7 +24,7 @@ def Yahoo_Check1(submit,str_1,str_2):
     options.add_experimental_option("prefs",prefs)
     chrome_driver = webdriver.Chrome(chrome_options=options)
     print('preparing...')
-    chrome_driver.implicitly_wait(10)  # 最长等待8秒
+    chrome_driver.implicitly_wait(20)  # 最长等待8秒
     print('getting site...')
     chrome_driver.get("https://login.yahoo.com/?.src=ym&lang=&done=https%3A%2F%2Fmail.yahoo.com%2F")
     # chrome_driver.get("https://www.google.com")
@@ -87,8 +87,6 @@ def Yahoo_Check1(submit,str_1,str_2):
             return 0
 
 def Yahoo_Check(submit,str_1,str_2):
-    path='../driver'
-    executable_path=path
     options = webdriver.ChromeOptions()
     options.add_argument('--incognito')
     ua = submit['ua']
@@ -97,7 +95,7 @@ def Yahoo_Check(submit,str_1,str_2):
     # options.add_experimental_option("prefs",prefs)
     chrome_driver = webdriver.Chrome(chrome_options=options)
     print('preparing...')
-    chrome_driver.implicitly_wait(10)  # 最长等待8秒
+    chrome_driver.implicitly_wait(20)  # 最长等待8秒
     print('getting site...')
     chrome_driver.get("https://login.yahoo.com/?.src=ym&lang=&done=https%3A%2F%2Fmail.yahoo.com%2F")
     # chrome_driver.get("https://www.google.com")
@@ -133,14 +131,14 @@ def Yahoo_Check(submit,str_1,str_2):
         print('meiyou done biaoqian')
     list1 = chrome_driver.find_elements_by_tag_name("a")
     try:
-        [a.click() for a in list1 if "Cam4" in str(a.get_attribute('innerHTML'))]
+        [a.click() for a in list1 if str_1 in str(a.get_attribute('innerHTML'))]
     except:
         print('........')
     try:
         chrome_driver.maximize_window()
-        if chrome_driver.find_element_by_link_text('Verify Your Account'):
-            chrome_driver.find_element_by_link_text('Verify Your Account').click()
-            rantime = random.randint(2,4)
+        if chrome_driver.find_element_by_link_text(str_2):
+            chrome_driver.find_element_by_link_text(str_2).click()
+            rantime = random.randint(10,15)
             sleep(rantime*60)
             chrome_driver.close()
             chrome_driver.quit()
@@ -156,14 +154,14 @@ def Yahoo_Check(submit,str_1,str_2):
             chrome_driver.find_element_by_link_text('Spam').click()
             list3 = chrome_driver.find_elements_by_class_name("o_h")
             try:
-                [a.click() for a in list3 if "Cam4" in str(a.get_attribute('innerText'))]
+                [a.click() for a in list3 if str_1 in str(a.get_attribute('innerText'))]
             except:
                 print('===========')
             try:
                 chrome_driver.maximize_window()
-                if chrome_driver.find_element_by_link_text('Verify Your Account'):
-                    chrome_driver.find_element_by_link_text('Verify Your Account').click()
-                    rantime = random.randint(1,3)
+                if chrome_driver.find_element_by_link_text(str_2):
+                    chrome_driver.find_element_by_link_text(str_2).click()
+                    rantime = random.randint(10,15)
                     sleep(rantime*60)
                     chrome_driver.close()
                     chrome_driver.quit()
