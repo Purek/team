@@ -91,6 +91,8 @@ def Yahoo_Check(submit,str_1,str_2):
     executable_path=path
     options = webdriver.ChromeOptions()
     options.add_argument('--incognito')
+    ua = submit['ua']
+    options.add_argument('user-agent="%s"' % ua)
     # prefs = {"profile.managed_default_content_settings.images":2}
     # options.add_experimental_option("prefs",prefs)
     chrome_driver = webdriver.Chrome(chrome_options=options)

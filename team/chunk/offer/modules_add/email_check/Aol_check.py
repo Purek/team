@@ -17,11 +17,8 @@ import random
 def Aol_Check(submit,str_1,str_2):
     options = webdriver.ChromeOptions()
     options.add_argument('--incognito')
-    # ua = submit['ua']
-    # ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
-    # prefs = {"profile.managed_default_content_settings.images":2}
-    # options.add_experimental_option("prefs",prefs)
-    # options.add_argument('user-agent="%s"' % ua)
+    ua = submit['ua']
+    options.add_argument('user-agent="%s"' % ua)
     chrome_driver = webdriver.Chrome(chrome_options=options)
     print('preparing...')
     chrome_driver.implicitly_wait(20)  # 最长等待8秒
