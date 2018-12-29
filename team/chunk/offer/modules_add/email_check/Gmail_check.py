@@ -46,10 +46,10 @@ def Gmail_Check(submit,str_1,str_2):
     print('loading finished...')
     # 登陆
     try:
-        chrome_driver.find_element_by_name('identifier').send_keys(submit['email'])
+        chrome_driver.find_element_by_class_name('RveJvd').click()
     except:
         return 0
-    chrome_driver.find_element_by_class_name('RveJvd').click()
+    
     chrome_driver.find_element_by_name('password').send_keys(submit['email_pwd'])
     # chrome_driver.find_element_by_id('passwordNext').click()
     sleep(3)
