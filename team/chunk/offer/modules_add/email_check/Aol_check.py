@@ -60,10 +60,11 @@ def Aol_Check(submit,str_1,str_2):
         [a.click() for a in list1 if str_1 in str(a.get_attribute('innerHTML'))]
         try:
             chrome_driver.maximize_window()
+            sleep(5)
             if chrome_driver.find_element_by_link_text(str_2):
                 chrome_driver.find_element_by_link_text(str_2).click()
                 rantime = random.randint(3,5)
-                sleep(rantime)   
+                sleep(rantime*60)   
                 chrome_driver.close()
                 chrome_driver.quit()
                 return 1
@@ -81,10 +82,11 @@ def Aol_Check(submit,str_1,str_2):
 
             try:
                 chrome_driver.maximize_window()
+                sleep(5)
                 if chrome_driver.find_element_by_link_text(str_2):
                     chrome_driver.find_element_by_link_text(str_2).click()
                     rantime = random.randint(3,5)
-                    sleep(rantime)   
+                    sleep(rantime*60)   
                     chrome_driver.close()
                     chrome_driver.quit()
                     return 1
