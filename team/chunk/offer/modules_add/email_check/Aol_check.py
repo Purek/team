@@ -16,22 +16,33 @@ import random
 
 def Aol_Check(submit,str_1,str_2):
     options = webdriver.ChromeOptions()
+    options.add_argument('--incognito')
     # ua = submit['ua']
-    ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
-    prefs = {"profile.managed_default_content_settings.images":2}
-    options.add_experimental_option("prefs",prefs)
-    options.add_argument('user-agent="%s"' % ua)
+    # ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
+    # prefs = {"profile.managed_default_content_settings.images":2}
+    # options.add_experimental_option("prefs",prefs)
+    # options.add_argument('user-agent="%s"' % ua)
     chrome_driver = webdriver.Chrome(chrome_options=options)
     print('preparing...')
-    chrome_driver.implicitly_wait(10)  # 最长等待8秒
+    chrome_driver.implicitly_wait(20)  # 最长等待8秒
     print('getting site...')
     chrome_driver.get("https://login.aol.com/?.src=guce-mail&lang=&done=https%3A%2F%2Fmail.aol.com%2F")
     # chrome_driver.get("https://www.google.com")
     print('loading finished...')
+    i = 0
+    while i <=3:
+        try:
+            chrome_driver.find_element_by_name('login-username').send_keys(submit['email'])
+            break
+        except:
+            chrome_driver.get("https://login.aol.com/?.src=guce-mail&lang=&done=https%3A%2F%2Fmail.aol.com%2F")
+            sleep(5)
+            i = i + 1  
     try:
-        chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
         chrome_driver.find_element_by_id('login-signin').click()
+        sleep(3)
         chrome_driver.find_element_by_id('login-passwd').send_keys(submit['email_pwd'])
+        sleep(5)
         chrome_driver.find_element_by_id('login-signin').click()
         sleep(5)
     except:

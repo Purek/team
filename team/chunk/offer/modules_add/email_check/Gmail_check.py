@@ -31,10 +31,22 @@ def Gmail_Check(submit,str_1,str_2):
     chrome_driver.implicitly_wait(20)  # 最长等待8秒
     print('getting site...')
     chrome_driver.get("https://mail.google.com/")
+    i = 0
+    while i <=3:
+        try:
+            chrome_driver.find_element_by_name('identifier').send_keys(submit['email'])
+            break
+        except:
+            chrome_driver.get("https://mail.google.com/")
+            sleep(5)
+            i = i + 1   
     # chrome_driver.get("https://www.google.com")
     print('loading finished...')
     # 登陆
-    chrome_driver.find_element_by_name('identifier').send_keys(submit['email'])
+    try:
+        chrome_driver.find_element_by_name('identifier').send_keys(submit['email'])
+    except:
+        return 0
     chrome_driver.find_element_by_class_name('RveJvd').click()
     chrome_driver.find_element_by_name('password').send_keys(submit['email_pwd'])
     # chrome_driver.find_element_by_id('passwordNext').click()
