@@ -104,7 +104,7 @@ def Yahoo_Check(submit,str_1,str_2):
     i = 0
     while i <=3:
         try:
-            chrome_driver.find_element_by_name('login-username').send_keys(submit['email'])
+            chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
             break
         except:
             chrome_driver.get("https://login.yahoo.com/?.src=ym&lang=&done=https%3A%2F%2Fmail.yahoo.com%2F")
