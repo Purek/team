@@ -104,9 +104,8 @@ for i in list_rows:
     sheet = workbook.sheet_by_index(0)
     if sheet.cell(i+1,0).value != '':
         continue
-    
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))#现在
-    if flag_reg == 0 or flag_reg == 2:
+    if flag_reg == 0:
         city,count = ip_test.ip_Test('')
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))#现在
     print('city:')
@@ -176,10 +175,7 @@ for i in list_rows:
         else:
             print('fail to register')
             sheet2.write(i+1,6,'register failed')
-            if submit['status'] == '':
-                flag_reg = 2  #2 means ip wrong
-            else:
-                flag_reg = 1
+            flag_reg = 1
     except:
         print('failed')
         sheet2.write(i+1,6,'email commit failed')
