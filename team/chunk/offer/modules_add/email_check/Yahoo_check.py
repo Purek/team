@@ -173,10 +173,13 @@ def Yahoo_Check(submit,str_1,str_2):
         # spam
         try:
             try:
-                chrome_driver.find_element_by_link_text('More').click()
+                list_more = chrome_driver.find_elements_by_tag_name('li')
+                [a.click() for a in list_more if 'More' in str(a.get_attribute('innerText'))]
+                #chrome_driver.find_element_by_link_text('More').click()
             except:
                 print('no more')
             chrome_driver.find_element_by_link_text('Spam').click()
+            sleep(10)
             list3 = chrome_driver.find_elements_by_class_name("o_h")
             try:
                 [a.click() for a in list3 if str_1 in str(a.get_attribute('innerText'))]
@@ -210,7 +213,7 @@ def Yahoo_Check(submit,str_1,str_2):
 if __name__=='__main__':
     submit={}
     submit['name'] = 'coco'
-    submit['email'] = 'TeriKimm@yahoo.com'
-    submit['email_pwd'] = '3tkxgk4G'
+    submit['email'] = 'JaneWintere@yahoo.com'
+    submit['email_pwd'] = 'Ge7D8sem'
     submit['ua'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0'
     Yahoo_Check(submit,'Cam4','Verify Your Account')
