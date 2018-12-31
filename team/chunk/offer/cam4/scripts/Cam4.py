@@ -116,11 +116,11 @@ for i in list_rows:
     submit['email_assist'] = sheet.cell(i+1,4).value
     submit['ua'] = sheet.cell(i+1,5).value
     submit['site'] = sheet.cell(1,8).value
-    sheet2.write(i+1,7,city)
     submit['status'] = ''
     book2 = copy(workbook)
     sheet2 = book2.get_sheet(0)
     sheet2.write(i+1,0,submit['name'])
+    sheet2.write(i+1,7,city)
     try:
         print('...')
         submit['status'],submit['name'] = web_Submit(submit)
