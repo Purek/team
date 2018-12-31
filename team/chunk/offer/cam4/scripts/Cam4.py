@@ -37,7 +37,8 @@ def web_Submit(submit):
         try:
             chrome_driver.find_element_by_xpath("/html/body/div[1]/div[1]/div/div[1]").click()      #18+
             print('loading finished...')
-            break
+            if 'Join CAM4' in chrome_driver.title:
+                break
         except:
             chrome_driver.get(submit['site'])
             sleep(5)
@@ -182,6 +183,7 @@ for i in list_rows:
                 flag_reg = 1
     except:
         print('failed')
+        #flag_reg = 2
         sheet2.write(i+1,6,'email commit failed')
     finally:
         book2.save('..\config\c4mconfig.xlsx')
