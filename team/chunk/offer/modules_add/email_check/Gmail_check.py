@@ -81,6 +81,7 @@ def Gmail_Check(submit,str_1,str_2):
     try:
         list1 = chrome_driver.find_elements_by_tag_name('tr')
         [a.click() for a in list1 if str_1 in str(a.get_attribute('innerText'))]
+        sleep(10)
         try:
             chrome_driver.find_element_by_link_text(str_2).click()
             rantime = random.randint(10,15)
@@ -102,7 +103,7 @@ def Gmail_Check(submit,str_1,str_2):
                     try:
                         list3 = chrome_driver.find_elements_by_tag_name('tr')
                         [a.click() for a in list3 if str_1 in str(a.get_attribute('innerText'))]
-                        sleep(5)
+                        sleep(10)
                         try:
                             list4 = chrome_driver.find_elements_by_tag_name('a')
                             print('aaaaaaaaaaaaa')
