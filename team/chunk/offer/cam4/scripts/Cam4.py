@@ -98,13 +98,15 @@ print(rows)
 list_rows = random.sample(range(rows-1),rows-1)
 # i = 0
 # while i <= rows-1:
+flag_reg = 0
 for i in list_rows:
     workbook = xlrd.open_workbook(path_excel)
     sheet = workbook.sheet_by_index(0)
     if sheet.cell(i+1,0).value != '':
         continue
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))#现在
-    city,count = ip_test.ip_Test('')
+    if flag_reg == 0:
+        city,count = ip_test.ip_Test('')
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))#现在
     print('city:')
     print(city)
@@ -124,6 +126,7 @@ for i in list_rows:
     sheet2 = book2.get_sheet(0)
     sheet2.write(i+1,0,submit['name'])
     sheet2.write(i+1,7,city)
+    flag_reg = 0
     try:
         print('...')
         submit['status'],submit['name'] = web_Submit(submit)
@@ -172,6 +175,7 @@ for i in list_rows:
         else:
             print('fail to register')
             sheet2.write(i+1,6,'register failed')
+            flag_reg = 1
     except:
         print('failed')
         sheet2.write(i+1,6,'email commit failed')
@@ -180,8 +184,9 @@ for i in list_rows:
         print('成功保存')
         i = i + 1
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-    rantime = random.randint(15,40)
-    print('wait for %d minutes'%rantime)
-    sleep(rantime*60)
+    if flag_reg == 0:
+        rantime = random.randint(15,40)
+        print('wait for %d minutes'%rantime)
+        sleep(rantime*60)
 
 
