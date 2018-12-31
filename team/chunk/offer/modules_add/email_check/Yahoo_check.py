@@ -100,6 +100,7 @@ def Yahoo_Check(submit,str_1,str_2):
     chrome_driver.get("https://login.yahoo.com/?.src=ym&lang=&done=https%3A%2F%2Fmail.yahoo.com%2F")
     # chrome_driver.get("https://www.google.com")
     print('loading finished...')
+    print(submit['name'],submit['email'])
     # 登陆
     i = 0
     while i <=3:
@@ -124,13 +125,37 @@ def Yahoo_Check(submit,str_1,str_2):
     sleep(2)
     chrome_driver.find_element_by_id('login-signin').click()
     sleep(5)
-    list0 = chrome_driver.find_elements_by_tag_name("button")
+    i = 0
+    while i <=3:
+        try:
+            chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
+            break
+        except:
+            chrome_driver.get("https://login.yahoo.com/?.src=ym&lang=&done=https%3A%2F%2Fmail.yahoo.com%2F")
+            sleep(5)
+            i = i + 1   
+    # chrome_driver.get("https://www.google.com")
+    print('loading finished...')
+    # 登陆
     try:
+        sleep(3)
+        chrome_driver.find_element_by_id('login-signin').click()
+    except:
+        return 0
+
+    sleep(2)
+    chrome_driver.find_element_by_id('login-passwd').send_keys(submit['email_pwd'])
+    sleep(2)
+    chrome_driver.find_element_by_id('login-signin').click()
+    sleep(5)
+    try:
+        list0 = chrome_driver.find_elements_by_tag_name("button")
         [a.click() for a in list0 if "Done" in str(a.get_attribute('innerText'))]
     except:
         print('meiyou done biaoqian')
-    list1 = chrome_driver.find_elements_by_tag_name("a")
+    
     try:
+        list1 = chrome_driver.find_elements_by_tag_name("a")
         [a.click() for a in list1 if str_1 in str(a.get_attribute('innerHTML'))]
     except:
         print('........')
@@ -184,6 +209,8 @@ def Yahoo_Check(submit,str_1,str_2):
 
 if __name__=='__main__':
     submit={}
-    submit['email'] = 'doyle.cornelia@yahoo.com'
-    submit['email_pwd'] = 'TemOvDwxzU64'
+    submit['name'] = 'coco'
+    submit['email'] = 'TeriKimm@yahoo.com'
+    submit['email_pwd'] = '3tkxgk4G'
+    submit['ua'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0'
     Yahoo_Check(submit,'Cam4','Verify Your Account')
