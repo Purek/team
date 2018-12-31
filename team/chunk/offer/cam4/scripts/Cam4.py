@@ -99,6 +99,10 @@ list_rows = random.sample(range(rows-1),rows-1)
 # i = 0
 # while i <= rows-1:
 for i in list_rows:
+    workbook = xlrd.open_workbook(path_excel)
+    sheet = workbook.sheet_by_index(0)
+    if sheet.cell(i+1,0).value != '':
+        continue
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))#现在
     city,count = ip_test.ip_Test('')
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))#现在
@@ -106,8 +110,7 @@ for i in list_rows:
     print(city)
     print('annomonity:')
     print(count)
-    workbook = xlrd.open_workbook(path_excel)
-    sheet = workbook.sheet_by_index(0)
+
     submit = {}
     submit['name'] = ng.gen_one_word_digit(lowercase=False)
     submit['pwd'] = sheet.cell(i+1,1).value
