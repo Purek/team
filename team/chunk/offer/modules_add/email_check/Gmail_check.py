@@ -53,8 +53,11 @@ def Gmail_Check(submit,str_1,str_2):
     chrome_driver.find_element_by_name('password').send_keys(submit['email_pwd'])
     # chrome_driver.find_element_by_id('passwordNext').click()
     sleep(3)
-    list1 = chrome_driver.find_elements_by_class_name('U26fgb')
-    [a.click() for a in list1 if 'Next' in str(a.get_attribute('innerHTML'))]
+    try:
+        list1 = chrome_driver.find_elements_by_class_name('U26fgb')
+        [a.click() for a in list1 if 'Next' in str(a.get_attribute('innerHTML'))]
+    except:
+        print('No next.....')
     try:
         chrome_driver.find_element_by_class_name('TnvOCe').send_keys(Keys.ENTER)
 
