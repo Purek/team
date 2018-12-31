@@ -95,14 +95,13 @@ workbook = xlrd.open_workbook(path_excel)
 sheet = workbook.sheet_by_index(0)
 rows = sheet.nrows
 print(rows)
-i = 0
-while i <= rows-1:
+list_rows = random.sample(range(rows-1),rows-1)
+# i = 0
+# while i <= rows-1:
+for i in list_rows:
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))#现在
-    if i != 0:
-        rantime = random.randint(15,40)
-        print('wait for %d minutes'%rantime)
-        sleep(rantime*60)
     city,count = ip_test.ip_Test('')
+    print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))#现在
     print('city:')
     print(city)
     print('annomonity:')
@@ -116,7 +115,8 @@ while i <= rows-1:
     submit['email_pwd'] = sheet.cell(i+1,3).value
     submit['email_assist'] = sheet.cell(i+1,4).value
     submit['ua'] = sheet.cell(i+1,5).value
-    submit['site'] = sheet.cell(1,7).value
+    submit['site'] = sheet.cell(1,8).value
+    sheet2.write(i+1,7,city)
     submit['status'] = ''
     book2 = copy(workbook)
     sheet2 = book2.get_sheet(0)
@@ -124,6 +124,7 @@ while i <= rows-1:
     try:
         print('...')
         submit['status'],submit['name'] = web_Submit(submit)
+        print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         if submit['name'] == '':
             break
         sheet2.write(i+1,0,submit['name'])
@@ -175,5 +176,9 @@ while i <= rows-1:
         book2.save('..\config\c4mconfig.xlsx')
         print('成功保存')
         i = i + 1
+    print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    rantime = random.randint(15,40)
+    print('wait for %d minutes'%rantime)
+    sleep(rantime*60)
 
 
