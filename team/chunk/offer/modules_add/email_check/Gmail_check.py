@@ -75,10 +75,11 @@ def Gmail_Check(submit,str_1,str_2):
 
     try:
         chrome_driver.find_element_by_css_selector('[data-tooltip = "Inbox"').click()
-        list1 = chrome_driver.find_elements_by_tag_name('tr')
+        
     except:
         print('ok')
     try:
+        list1 = chrome_driver.find_elements_by_tag_name('tr')
         [a.click() for a in list1 if str_1 in str(a.get_attribute('innerText'))]
         try:
             chrome_driver.find_element_by_link_text(str_2).click()
