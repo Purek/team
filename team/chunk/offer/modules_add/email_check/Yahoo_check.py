@@ -130,10 +130,14 @@ def Yahoo_Check(submit,str_1,str_2):
         sleep(3)
         chrome_driver.find_element_by_id('login-signin').click()
     except:
+        print('login name failed')
         return 0
 
     sleep(2)
-    chrome_driver.find_element_by_id('login-passwd').send_keys(submit['email_pwd'])
+    try:
+        chrome_driver.find_element_by_id('login-passwd').send_keys(submit['email_pwd'])
+    except:
+        print('login pwd failed')
     sleep(2)
     chrome_driver.find_element_by_id('login-signin').click()
     sleep(5)
@@ -170,19 +174,28 @@ def Yahoo_Check(submit,str_1,str_2):
             try:
                 list_more = chrome_driver.find_elements_by_tag_name('li')
                 [a.click() for a in list_more if 'More' in str(a.get_attribute('innerText'))]
+                print('clicking more')
                 #chrome_driver.find_element_by_link_text('More').click()
             except:
-                print('no more')
-            chrome_driver.find_element_by_link_text('Spam').click()
+                print('can not find more')
+            try:
+                sleep(5)
+                chrome_driver.find_element_by_link_text('Spam').click()
+                print('clicking spam')
+            except:
+                print('cannot find spam')
+
             sleep(10)
             list3 = chrome_driver.find_elements_by_class_name("o_h")
             try:
                 [a.click() for a in list3 if str_1 in str(a.get_attribute('innerText'))]
+                print('not  sure if find cam4')
             except:
-                print('===========')
+                print('cam4 not find')
             try:
                 # chrome_driver.maximize_window()
                 if chrome_driver.find_element_by_link_text(str_2):
+                    print('yes we find cam4 and we are clicking verify')
                     chrome_driver.find_element_by_link_text(str_2).click()
                     rantime = random.randint(10,15)
                     sleep(rantime*60)
