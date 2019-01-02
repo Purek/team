@@ -4,6 +4,9 @@ from time import sleep
 import random
 import datetime
 from selenium import webdriver
+import sys
+sys.path.append("../..")
+from modules_add.name_get import name_get as ng
 
 # path_excel = '..\config\c4mconfig.xlsx'
 # workbook = xlrd.open_workbook(path_excel)

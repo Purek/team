@@ -133,8 +133,6 @@ for i in list_rows:
         print('...')
         submit['status'],submit['name'] = web_Submit(submit)
         print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-        if submit['name'] == '':
-            break
         sheet2.write(i+1,0,submit['name'])
         if submit['status'] == 'success':
             flag = 0
