@@ -153,7 +153,7 @@ def Yahoo_Check(submit,str_1,str_2):
         list1 = chrome_driver.find_elements_by_tag_name("a")
         [a.click() for a in list1 if str_1 in str(a.get_attribute('innerHTML'))]
     except:
-        print('........')
+        print('........not found')
     try:
         # chrome_driver.maximize_window()
         if chrome_driver.find_element_by_link_text(str_2):
