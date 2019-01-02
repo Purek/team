@@ -23,7 +23,7 @@ def Aol_Check(submit,str_1,str_2):
     print('preparing...')
     chrome_driver.implicitly_wait(20)  # 最长等待8秒
     print('getting site...')
-    chrome_driver.get("https://login.aol.com/?.src=guce-mail&lang=&done=https%3A%2F%2Fmail.aol.com%2F")
+    chrome_driver.get("https://login.aol.com")
     # chrome_driver.get("https://www.google.com")
     print('loading finished...')
     i = 0
@@ -32,7 +32,7 @@ def Aol_Check(submit,str_1,str_2):
             chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
             break
         except:
-            chrome_driver.get("https://login.aol.com/?.src=guce-mail&lang=&done=https%3A%2F%2Fmail.aol.com%2F")
+            chrome_driver.get("https://login.aol.com")
             sleep(5)
             i = i + 1  
     try:
@@ -47,8 +47,19 @@ def Aol_Check(submit,str_1,str_2):
         chrome_driver.quit()
         return 0
 
+
+    try:
+        chrome_driver.find_element_by_css_selector('#mod-mail-preview-1 > div.navicon.navicon-mail')
+        #chrome_driver.find_element_by_xpath('//*[@id="navigation-menu-channels"]/div/ul/li[2]/a')
+    except:
+        print('into aol main,can not find mail entrency with css_selector')
+            
+
+
+
+
     try: 
-        chrome_driver.find_element_by_xpath('//*[@id="dijit__WidgetsInTemplateMixin_1"]/div/div[1]').click()
+        chrome_driver.find_element_by_xpath('//*[@id="mod-mail-preview-1"]/div[2]').click()
     except:
         print('no ads1')
     try:
@@ -119,6 +130,7 @@ def Aol_Check(submit,str_1,str_2):
     
 if __name__=='__main__':
     submit={}
-    submit['email'] = 'nicholas.buckle@aol.com'
-    submit['email_pwd'] = 'WKwc9YBIJDd5ml593'
+    submit['ua'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36'
+    submit['email'] = 'MelissaWilkinsonw@aol.com'
+    submit['email_pwd'] = 'AOmOCA5x'
     Aol_Check(submit,'Cam4','Verify your account')
