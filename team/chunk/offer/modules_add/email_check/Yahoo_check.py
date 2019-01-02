@@ -20,17 +20,20 @@ def Yahoo_Check1(submit,str_1,str_2):
     # executable_path=path
     options = webdriver.ChromeOptions()
     options.add_argument('--incognito')
-    prefs = {"profile.managed_default_content_settings.images":2}
-    options.add_experimental_option("prefs",prefs)
     chrome_driver = webdriver.Chrome(chrome_options=options)
     print('preparing...')
     chrome_driver.implicitly_wait(20)  # 最长等待8秒
     print('getting site...')
-    chrome_driver.get("https://login.yahoo.com/?.src=ym&lang=&done=https%3A%2F%2Fmail.yahoo.com%2F")
+    chrome_driver.get("https://www.yahoo.com/")
     # chrome_driver.get("https://www.google.com")
     print('loading finished...')
     # 登陆
-
+    print('tile is :')
+    print(chrome_driver.title)
+    try:
+        chrome_driver.find_element_by_id('uh-signin').click()
+    except:
+        print()
     chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
 
     chrome_driver.find_element_by_id('login-signin').click()
@@ -97,23 +100,32 @@ def Yahoo_Check(submit,str_1,str_2):
     print('preparing...')
     chrome_driver.implicitly_wait(20)  # 最长等待8秒
     print('getting site...')
-    chrome_driver.get("https://login.yahoo.com/?.src=ym&lang=&done=https%3A%2F%2Fmail.yahoo.com%2F")
+
     # chrome_driver.get("https://www.google.com")
-    print('loading finished...')
+    
     print(submit['name'],submit['email'])
+    print('tile is :')
+    print(chrome_driver.title)
+
     # 登陆
     i = 0
     while i <=3:
         try:
-            chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
-            break
+            chrome_driver.get('https://www.yahoo.com/')
+            if chrome_driver.title == 'Yahoo':
+                print('loading finished...')
+                break
         except:
-            chrome_driver.get("https://login.yahoo.com/?.src=ym&lang=&done=https%3A%2F%2Fmail.yahoo.com%2F")
-            sleep(5)
-            i = i + 1   
-    # chrome_driver.get("https://www.google.com")
-    print('loading finished...')
+            sleep(3)
+            i = i + 1  
+    # sleep(1000) 
+    try:
+        chrome_driver.find_element_by_id('uh-signin').click()
+        print('click singin ok')
+    except:
+        print('cannot find singin by id')
     # 登陆
+    chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
     try:
         sleep(3)
         chrome_driver.find_element_by_id('login-signin').click()
@@ -125,30 +137,12 @@ def Yahoo_Check(submit,str_1,str_2):
     sleep(2)
     chrome_driver.find_element_by_id('login-signin').click()
     sleep(5)
-    i = 0
-    chrome_driver.get("https://login.yahoo.com/?.src=ym&lang=&done=https%3A%2F%2Fmail.yahoo.com%2F")
-    while i <=3:
-        try:
-            chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
-            break
-        except:
-            chrome_driver.get("https://login.yahoo.com/?.src=ym&lang=&done=https%3A%2F%2Fmail.yahoo.com%2F")
-            sleep(5)
-            i = i + 1   
-    # chrome_driver.get("https://www.google.com")
-    print('loading finished...')
-    # 登陆
-    try:
-        sleep(3)
-        chrome_driver.find_element_by_id('login-signin').click()
-    except:
-        return 0
 
-    sleep(2)
-    chrome_driver.find_element_by_id('login-passwd').send_keys(submit['email_pwd'])
-    sleep(2)
-    chrome_driver.find_element_by_id('login-signin').click()
-    sleep(5)
+    try:
+        chrome_driver.find_element_by_css_selector('#uh-mail-link > i').click()
+    except:
+        print('into mail from main failed')
+
     try:
         list0 = chrome_driver.find_elements_by_tag_name("button")
         [a.click() for a in list0 if "Done" in str(a.get_attribute('innerText'))]
@@ -161,7 +155,7 @@ def Yahoo_Check(submit,str_1,str_2):
     except:
         print('........')
     try:
-        chrome_driver.maximize_window()
+        # chrome_driver.maximize_window()
         if chrome_driver.find_element_by_link_text(str_2):
             chrome_driver.find_element_by_link_text(str_2).click()
             rantime = random.randint(10,15)
@@ -187,7 +181,7 @@ def Yahoo_Check(submit,str_1,str_2):
             except:
                 print('===========')
             try:
-                chrome_driver.maximize_window()
+                # chrome_driver.maximize_window()
                 if chrome_driver.find_element_by_link_text(str_2):
                     chrome_driver.find_element_by_link_text(str_2).click()
                     rantime = random.randint(10,15)
