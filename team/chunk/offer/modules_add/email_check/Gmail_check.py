@@ -90,7 +90,7 @@ def Gmail_Check(submit,str_1,str_2):
         chrome_driver.close()
         chrome_driver.quit()
         return 1
-
+    sleep(5*60)
     try:
         chrome_driver.find_element_by_name('welcome_dialog_next').click()
         chrome_driver.find_element_by_name('ok').click()

@@ -14,6 +14,7 @@ import re
 import os
 import random
 from modules_add.Cam4 import Cam4_reg as web_reg
+import time
 
 def writelog(runinfo,e=''):
     file=open(os.getcwd()+"\log.txt",'a+')
@@ -67,6 +68,7 @@ def Aol_Check(submit,str_1,str_2):
         return 0
     #这里还要再加个判断，用title,这步之后返回都是1和2
     writelog('mail.aol.com login successed')
+
     try:
         flag = web_reg.web_Submit(submit)
         if flag == 0:
@@ -81,7 +83,7 @@ def Aol_Check(submit,str_1,str_2):
         chrome_driver.close()
         chrome_driver.quit()
         return 1
-    # sleep(5*60)     
+    sleep(5*60)     
     try: 
         chrome_driver.find_element_by_xpath('//*[@id="mod-mail-preview-1"]/div[2]').click()
     except Exception as e:
