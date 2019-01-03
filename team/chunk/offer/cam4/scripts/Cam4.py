@@ -18,7 +18,7 @@ import random
 import os
 import datetime
 
-def web_Submit(submit): 
+def web_Submit(submit,site): 
     # path='../driver'
     # executable_path=path
     options = webdriver.ChromeOptions()
@@ -31,7 +31,7 @@ def web_Submit(submit):
     chrome_driver.implicitly_wait(20)  # 最长等待8秒
     print('getting site...')
     # chrome_driver.get("http://click.prodailyfinance.com/click.php?c=1&key=02q01o3378537qrqy3s9clei")
-    chrome_driver.get(submit['site'])
+    chrome_driver.get(site)
     i = 0
     while i <=3:
         try:
@@ -104,12 +104,9 @@ for i in list_rows:
     workbook = xlrd.open_workbook(path_excel)
     sheet = workbook.sheet_by_index(0)
     if sheet.cell(i+1,0).value != '':
-        continue
-    
-    print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))#现在
+        continue 
     if flag_reg == 0 or flag_reg == 2:
         city,count = ip_test.ip_Test('')
-    print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))#现在
     print('city:')
     print(city)
     print('annomonity:')
