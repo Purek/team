@@ -111,11 +111,13 @@ def choose_Mail():
                 elif flag == 1:
                     sheet2.write(i,6,'login success but verify failed')
                     sheet2.write(i,7,city)
-                else:
+                elif flag == 2:
                     sheet2.write(i,7,city)
                     rantime = random.randint(10,15)
                     sleep(rantime*60)                     
                     city,count = ip_test.ip_Test('')
+                else:
+                    sheet2.write(i,6,'overview yahoo')
             except Exception as e:
                 sheet2.write(i,6,'login failed')
                 writelog('yahoo login error',str(e))     

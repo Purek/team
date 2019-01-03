@@ -84,6 +84,13 @@ def Yahoo_Check(submit,str_1,str_2):
         chrome_driver.quit()
         return 0
         print('into mail from main failed')
+    if 'Yahoo Mail' in chrome_driver.title:
+        chrome_driver.close()
+        chrome_driver.quit()
+        writelog('overview.mail.yahoo.com')
+        return -1
+
+
 
     writelog('mail.yahoo.com login successed')
     try:
