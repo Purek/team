@@ -14,31 +14,29 @@ import re
 import os
 import random
 
-
+def writelog(runinfo,e=''):
+    file=open(os.getcwd()+"\log.txt",'a+')
+    file.write(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))+" : \n"+runinfo+"\n"+e+'\n')
+    file.close()
 
 def Gmail_Check(submit,str_1,str_2):
+    writelog(submit['email']+'login start:')
     # path='../driver'
     # executable_path=path
     options = webdriver.ChromeOptions()
     options.add_argument('--incognito')
+    options.add_argument("--disable-infobars")
     ua = submit['ua']
     options.add_argument('user-agent="%s"' % ua)
-    # ua = submit['ua']
-    # ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
-    # prefs = {"profile.managed_default_content_settings.images":2}
-    # options.add_experimental_option("prefs",prefs)
-    # options.add_argument('user-agent="%s"' % ua)
     chrome_driver = webdriver.Chrome(chrome_options=options)
-    print('preparing...')
     chrome_driver.implicitly_wait(20)  # 最长等待8秒
-    print('getting site...')
     chrome_driver.get("https://mail.google.com/")
     i = 0
     while i <=3:
         try:
             chrome_driver.find_element_by_name('identifier').send_keys(submit['email'])
             break
-        except:
+        except Exception as e:
             chrome_driver.get("https://mail.google.com/")
             sleep(5)
             i = i + 1   
@@ -47,16 +45,24 @@ def Gmail_Check(submit,str_1,str_2):
     # 登陆
     try:
         chrome_driver.find_element_by_class_name('RveJvd').click()
-    except:
+    except Exception as e:
+        writelog('mail.google.com login failed',e)
+        chrome_driver.close()
+        chrome_driver.quit()
         return 0
-    
-    chrome_driver.find_element_by_name('password').send_keys(submit['email_pwd'])
+    try:
+        chrome_driver.find_element_by_name('password').send_keys(submit['email_pwd'])
+    except Exception as e:
+        writelog('mail.google.com login failed',e)
+        chrome_driver.close()
+        chrome_driver.quit()
+        return 0        
     # chrome_driver.find_element_by_id('passwordNext').click()
     sleep(3)
     try:
         list1 = chrome_driver.find_elements_by_class_name('U26fgb')
         [a.click() for a in list1 if 'Next' in str(a.get_attribute('innerHTML'))]
-    except:
+    except Exception as e:
         print('No next.....')
     try:
         chrome_driver.find_element_by_class_name('TnvOCe').send_keys(Keys.ENTER)
@@ -65,18 +71,34 @@ def Gmail_Check(submit,str_1,str_2):
         chrome_driver.find_element_by_name('knowledgePreregisteredEmailResponse').send_keys(submit['email_assist'])
         chrome_driver.find_element_by_class_name('U26fgb').send_keys(Keys.ENTER)
         chrome_driver.find_element_by_class_name('U26fgb').send_keys(Keys.ENTER)
-    except:
+    except Exception as e:
         print('no assistance needed')
+    
+    writelog('mail.aol.com login successed')
+    try:
+        flag = web_reg.web_Submit(submit)
+        if flag == 0:
+            writelog('register failed')
+            chrome_driver.close()
+            chrome_driver.quit()
+            return 1
+        else:
+            writelog('register success')
+    except Exception as e:
+        writelog('register failed with error:',e)
+        chrome_driver.close()
+        chrome_driver.quit()
+        return 1
+
     try:
         chrome_driver.find_element_by_name('welcome_dialog_next').click()
         chrome_driver.find_element_by_name('ok').click()
-    except:
+    except Exception as e:
         print('no next')
 
     try:
-        chrome_driver.find_element_by_css_selector('[data-tooltip = "Inbox"').click()
-        
-    except:
+        chrome_driver.find_element_by_css_selector('[data-tooltip = "Inbox"').click()   
+    except Exception as e:
         print('ok')
     try:
         list1 = chrome_driver.find_elements_by_tag_name('tr')
@@ -84,12 +106,12 @@ def Gmail_Check(submit,str_1,str_2):
         sleep(10)
         try:
             chrome_driver.find_element_by_link_text(str_2).click()
-            rantime = random.randint(10,15)
+            rantime = random.randint(5,10)
             sleep(rantime*60)
             chrome_driver.close()
             chrome_driver.quit()
-            return 1
-        except:
+            return 2
+        except Exception as e:
             print('goto more')
             list2 = chrome_driver.find_elements_by_tag_name('span')
             try:
@@ -111,25 +133,35 @@ def Gmail_Check(submit,str_1,str_2):
                             print('bbbbbbbbbbbbbbb')
                             # chrome_driver.find_element_by_link_text(str_2).click()
                             print('ccccccccccccccc')
-                            rantime = random.randint(10,15)
+                            rantime = random.randint(5,10)
                             sleep(rantime*60)
                             chrome_driver.close()
                             chrome_driver.quit()
+                            return 2
+                        except Exception as e:
+                            writelog('verify failed with error:',e)
+                            chrome_driver.close()
+                            chrome_driver.quit()
                             return 1
-                        except:
-                           
-                            return 0
-                    except:
-                        return 0     
-                except:
+                    except Exception as e:
+                        chrome_driver.close()
+                        chrome_driver.quit()
+                        return 1     
+                except Exception as e:
                     print('no spam')
-                    return 0
-            except:
+                    chrome_driver.close()
+                    chrome_driver.quit()
+                    return 1
+            except Exception as e:
                 print('cant find more')
-                return 0
-    except:
+                chrome_driver.close()
+                chrome_driver.quit()
+                return 1
+    except Exception as e:
         print('cam4 not received')
-        return 0
+        chrome_driver.close()
+        chrome_driver.quit()
+        return 1
     
 
 if __name__=='__main__':

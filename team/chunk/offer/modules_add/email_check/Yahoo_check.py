@@ -13,116 +13,47 @@ from time import sleep
 import re
 import os
 import random
+import time
 
-
-def Yahoo_Check1(submit,str_1,str_2):
-    # path='../driver'
-    # executable_path=path
-    options = webdriver.ChromeOptions()
-    options.add_argument('--incognito')
-    chrome_driver = webdriver.Chrome(chrome_options=options)
-    print('preparing...')
-    chrome_driver.implicitly_wait(20)  # 最长等待8秒
-    print('getting site...')
-    chrome_driver.get("https://www.yahoo.com/")
-    # chrome_driver.get("https://www.google.com")
-    print('loading finished...')
-    # 登陆
-    print('tile is :')
-    print(chrome_driver.title)
-    try:
-        chrome_driver.find_element_by_id('uh-signin').click()
-    except:
-        print()
-    chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
-
-    chrome_driver.find_element_by_id('login-signin').click()
-    chrome_driver.find_element_by_id('login-passwd').send_keys(submit['email_pwd'])
-    chrome_driver.find_element_by_id('login-signin').click()
-    sleep(5)
-
-    list1 = chrome_driver.find_elements_by_class_name("o_h")
-    try:
-        [a.click() for a in list1 if "Cam4" in str(a.get_attribute('innerHTML'))]
-    except:
-        print('........')
-
-
-
-    try:
-        chrome_driver.maximize_window()
-        if chrome_driver.find_element_by_link_text('Verify Your Account'):
-            chrome_driver.find_element_by_link_text('Verify Your Account').click()
-            sleep(15)
-            chrome_driver.close()
-            chrome_driver.quit()
-            return 1
-    except:
-        print("can't find verify button")
-        # spam
-        try:
-            chrome_driver.find_elements_by_class_name("D_F")
-            sleep(5)
-            list3 = chrome_driver.find_elements_by_class_name("o_h")
-            print(list3)
-            try:
-                [a.click() for a in list3 if "Cam4" in str(a.get_attribute('innerHTML'))]
-            except:
-                print('===========')
-            try:
-                chrome_driver.maximize_window()
-                if chrome_driver.find_element_by_link_text('Verify Your Account'):
-                    chrome_driver.find_element_by_link_text('Verify Your Account').click()
-                    sleep(15)
-                    chrome_driver.close()
-                    chrome_driver.quit()
-                    return 1
-            except:
-                print("can't find verify button")
-                # sleep(5)
-                chrome_driver.close()
-                chrome_driver.quit()
-                return 0
-        except:
-            print('inbox not found')
-            chrome_driver.close()
-            chrome_driver.quit()
-            return 0
+def writelog(runinfo,e=''):
+    file=open(os.getcwd()+"\log.txt",'a+')
+    file.write(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))+" : \n"+runinfo+"\n"+e+'\n')
+    file.close()
 
 def Yahoo_Check(submit,str_1,str_2):
+    writelog(submit['email']+'login start:')
     options = webdriver.ChromeOptions()
     options.add_argument('--incognito')
     ua = submit['ua']
     options.add_argument('user-agent="%s"' % ua)
-    # prefs = {"profile.managed_default_content_settings.images":2}
-    # options.add_experimental_option("prefs",prefs)
+    options.add_argument("--disable-infobars")
     chrome_driver = webdriver.Chrome(chrome_options=options)
-    print('preparing...')
     chrome_driver.implicitly_wait(20)  # 最长等待8秒
-    print('getting site...')
-
-    # chrome_driver.get("https://www.google.com")
-    
-    print(submit['name'],submit['email'])
-    print('tile is :')
-    print(chrome_driver.title)
-
-    # 登陆
     i = 0
     while i <=3:
-        try:
+        print(i)
+        if chrome_driver.title != 'Yahoo':
+            print(chrome_driver.title)
             chrome_driver.get('https://www.yahoo.com/')
-            if chrome_driver.title == 'Yahoo':
-                print('loading finished...')
-                break
-        except:
+            i = i + 1
+        else:
+            print(chrome_driver.title)
             sleep(3)
-            i = i + 1  
+            break
+
     # sleep(1000) 
     try:
+        if chrome_driver.title != 'Yahoo':
+            chrome_driver.close()
+            chrome_driver.quit()
+            return 0
+
         chrome_driver.find_element_by_id('uh-signin').click()
         print('click singin ok')
     except:
+        chrome_driver.close()
+        chrome_driver.quit()
+        return 0
         print('cannot find singin by id')
     # 登陆
     chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
@@ -131,6 +62,8 @@ def Yahoo_Check(submit,str_1,str_2):
         chrome_driver.find_element_by_id('login-signin').click()
     except:
         print('login name failed')
+        chrome_driver.close()
+        chrome_driver.quit()
         return 0
 
     sleep(2)
@@ -145,8 +78,26 @@ def Yahoo_Check(submit,str_1,str_2):
     try:
         chrome_driver.find_element_by_css_selector('#uh-mail-link > i').click()
     except:
+        chrome_driver.close()
+        chrome_driver.quit()
+        return 0
         print('into mail from main failed')
 
+    writelog('mail.yahoo.com login successed')
+    try:
+        flag = web_reg.web_Submit(submit)
+        if flag == 0:
+            writelog('register failed')
+            chrome_driver.close()
+            chrome_driver.quit()
+            return 1
+        else:
+            writelog('register success')
+    except Exception as e:
+        writelog('register failed with error:',e)
+        chrome_driver.close()
+        chrome_driver.quit()
+        return 1
     try:
         list0 = chrome_driver.find_elements_by_tag_name("button")
         [a.click() for a in list0 if "Done" in str(a.get_attribute('innerText'))]
