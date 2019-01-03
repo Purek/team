@@ -13,6 +13,7 @@ from time import sleep
 import re
 import os
 import random
+from modules_add.Cam4 import Cam4_reg as web_reg
 
 def writelog(runinfo,e=''):
     file=open(os.getcwd()+"\log.txt",'a+')
@@ -46,14 +47,14 @@ def Gmail_Check(submit,str_1,str_2):
     try:
         chrome_driver.find_element_by_class_name('RveJvd').click()
     except Exception as e:
-        writelog('mail.google.com login failed',e)
+        writelog('mail.google.com login failed',str(e))
         chrome_driver.close()
         chrome_driver.quit()
         return 0
     try:
         chrome_driver.find_element_by_name('password').send_keys(submit['email_pwd'])
     except Exception as e:
-        writelog('mail.google.com login failed',e)
+        writelog('mail.google.com login failed',str(e))
         chrome_driver.close()
         chrome_driver.quit()
         return 0        
@@ -85,7 +86,7 @@ def Gmail_Check(submit,str_1,str_2):
         else:
             writelog('register success')
     except Exception as e:
-        writelog('register failed with error:',e)
+        writelog('register failed with error:',str(e))
         chrome_driver.close()
         chrome_driver.quit()
         return 1
@@ -139,7 +140,7 @@ def Gmail_Check(submit,str_1,str_2):
                             chrome_driver.quit()
                             return 2
                         except Exception as e:
-                            writelog('verify failed with error:',e)
+                            writelog('verify failed with error:',str(e))
                             chrome_driver.close()
                             chrome_driver.quit()
                             return 1

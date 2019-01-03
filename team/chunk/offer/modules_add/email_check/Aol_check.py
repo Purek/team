@@ -39,7 +39,7 @@ def Aol_Check(submit,str_1,str_2):
             chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
             break
         except Exception as e:
-            writelog('accessing aol.com',e)
+            writelog('accessing aol.com',str(e))
             chrome_driver.get("https://login.aol.com")
             sleep(5)
             i = i + 1  
@@ -51,7 +51,7 @@ def Aol_Check(submit,str_1,str_2):
         chrome_driver.find_element_by_id('login-signin').click()
         sleep(5)
     except Exception as e:
-        writelog('aol.com login failed',e)
+        writelog('aol.com login failed',str(e))
         chrome_driver.close()
         chrome_driver.quit()
         return 0
@@ -60,7 +60,7 @@ def Aol_Check(submit,str_1,str_2):
         chrome_driver.find_element_by_css_selector('#mod-mail-preview-1 > div.navicon.navicon-mail')
         #chrome_driver.find_element_by_xpath('//*[@id="navigation-menu-channels"]/div/ul/li[2]/a')
     except Exception as e:
-        writelog('mail.aol.com login failed',e)
+        writelog('mail.aol.com login failed',str(e))
         print('into aol main,can not find mail entrency with css_selector')
         chrome_driver.close()
         chrome_driver.quit()
@@ -77,7 +77,7 @@ def Aol_Check(submit,str_1,str_2):
         else:
             writelog('register success')
     except Exception as e:
-        writelog('register failed with error:',e)
+        writelog('register failed with error:',str(e))
         chrome_driver.close()
         chrome_driver.quit()
         return 1

@@ -1,4 +1,5 @@
-
+import sys
+sys.path.append("../..")
 
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.keys import Keys
@@ -14,6 +15,7 @@ import re
 import os
 import random
 import time
+from modules_add.Cam4 import Cam4_reg as web_reg
 
 def writelog(runinfo,e=''):
     file=open(os.getcwd()+"\log.txt",'a+')
@@ -94,7 +96,7 @@ def Yahoo_Check(submit,str_1,str_2):
         else:
             writelog('register success')
     except Exception as e:
-        writelog('register failed with error:',e)
+        writelog('register failed with error:',str(e))
         chrome_driver.close()
         chrome_driver.quit()
         return 1

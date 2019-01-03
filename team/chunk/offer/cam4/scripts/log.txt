@@ -10,3 +10,18 @@ name 'Aol_check' is not defined
 2019-01-03 15:23:39 : 
 aol login error
 name 'Aol_check' is not defined
+2019-01-03 18:51:49 : 
+gmail login error
+name 'time' is not defined
+2019-01-03 18:51:49 : 
+aol login error
+name 'time' is not defined
+2019-01-03 18:51:49 : 
+asd@yahoo.comlogin start:
+
+2019-01-03 19:02:06 : 
+aol login error
+name 'time' is not defined
+2019-01-03 19:02:06 : 
+asd@yahoo.comlogin start:
+
