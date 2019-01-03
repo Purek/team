@@ -58,7 +58,7 @@ def Aol_Check(submit,str_1,str_2):
         return 0
 
     try:
-        chrome_driver.find_element_by_css_selector('#mod-mail-preview-1 > div.navicon.navicon-mail')
+        chrome_driver.find_element_by_css_selector('#mod-mail-preview-1 > div.navicon.navicon-mail').click()
         #chrome_driver.find_element_by_xpath('//*[@id="navigation-menu-channels"]/div/ul/li[2]/a')
     except Exception as e:
         writelog('mail.aol.com login failed',str(e))
