@@ -67,10 +67,17 @@ def choose_Mail():
     site = sheet.cell(1,8).value
     print(site)
     # submit = {}
+    #every five times not access to email,chang ip,record with flag_ip
+    #everytime chang ip,reset flag_ip
     flag = 0
-    # city,count = ip_test.ip_Test('')
+    city,count = ip_test.ip_Test('')
+    print('==================')
+    flag_ip = 0
     for i in list_rows:
         print(i)
+        if flag_ip >= 3:
+            city,count = ip_test.ip_Test('')
+            flag_ip = 0
         workbook = xlrd.open_workbook(path_excel)
         sheet = workbook.sheet_by_index(0)
         book2 = copy(workbook)
@@ -78,8 +85,10 @@ def choose_Mail():
         if sheet.cell(i,0).value != '':
             continue 
         submit1 = sheet.row_values(i)
-        submit = submit_Dict(submit1)
-
+        try:
+            submit = submit_Dict(submit1)
+        except:
+            print('submit get wrong')
         if 'aol.com' in submit['email']:
             print('aol')
             try:
@@ -87,18 +96,25 @@ def choose_Mail():
                 flag = Aol_check.Aol_Check(submit,'Cam4','Verify Your Account')
                 print(flag)
                 if flag == 0:
-                    sheet2.write(i,6,'login failed')
+                    sheet2.write(i,6,'login failed or registerd')
+                    flag_ip = flag_ip + 1
                 elif flag == 1:
                     sheet2.write(i,6,'login success but verify failed')
-                    sheet2.write(i+1,7,city)
-                else:
-                    sheet2.write(i,6,'login success')
                     sheet2.write(i,7,city)
-                    rantime = random.randint(10,15)
-                    sleep(rantime*60)                     
-                    city,count = ip_test.ip_Test('')                    
+                    sheet2.write(i,0,'bademail')
+                else:
+                    sheet2.write(i,6,'success')
+                    sheet2.write(i,7,city)
+                    sheet2.write(i,0,submit['name'])
+                    
+                    rantime = random.randint(3,5)
+                    sleep(rantime*60)
+                    print('sleep for %d minutes'%rantime)
+                    print('==================')
+                    city,count = ip_test.ip_Test('')
+                    flag_ip = 0
             except Exception as e:
-                sheet2.write(i,6,'login failed')
+                sheet2.write(i,6,'login failed or registerd')
                 writelog('aol login error',str(e))     
         elif 'yahoo.com' in submit['email']:
             print('yahoo')
@@ -107,17 +123,23 @@ def choose_Mail():
                 flag = Yahoo_check.Yahoo_Check(submit,'Cam4','Verify Your Account')
                 print(flag)
                 if flag == 0:
-                    sheet2.write(i,6,'login failed')
+                    sheet2.write(i,6,'login failed or registerd')
+                    flag_ip = flag_ip + 1
                 elif flag == 1:
                     sheet2.write(i,6,'login success but verify failed')
+                    sheet2.write(i,0,'bademail')
                     sheet2.write(i,7,city)
                 elif flag == 2:
                     sheet2.write(i,7,city)
-                    rantime = random.randint(10,15)
+                    sheet2.write(i,6,'success')
+                    sheet2.write(i,0,submit['name'])
+                    rantime = random.randint(3,7)
                     sleep(rantime*60)                     
                     city,count = ip_test.ip_Test('')
+                    flag_ip = 0
                 else:
                     sheet2.write(i,6,'overview yahoo')
+                    sheet2.write(i,0,'bademail')
             except Exception as e:
                 sheet2.write(i,6,'login failed')
                 writelog('yahoo login error',str(e))     
@@ -129,19 +151,24 @@ def choose_Mail():
                 print(flag)
                 if flag == 0:
                     sheet2.write(i,6,'login failed')
+                    flag_ip = flag_ip + 1
                 elif flag == 1:
                     sheet2.write(i,6,'login success but verify failed')
                     sheet2.write(i,7,city)
+                    sheet2.write(i,0,'bademail')
                 else:
                     sheet2.write(i,7,city)
-                    rantime = random.randint(10,15)
+                    sheet2.write(i,6,'success')
+                    sheet2.write(i,0,submit['name'])
+                    rantime = random.randint(2,8)
                     sleep(rantime*60)             
                     city,count = ip_test.ip_Test('')
+                    flag_ip = 0
             except Exception as e:
                 sheet2.write(i,6,'login failed')
                 writelog('gmail login error',str(e))   
-    book2.save('..\config\c4mconfig.xlsx')
-    print('成功保存')                
+        book2.save('..\config\c4mconfig.xlsx')
+        print('成功保存')                
 
 
 if __name__=='__main__':

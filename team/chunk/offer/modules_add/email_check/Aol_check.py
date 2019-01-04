@@ -14,6 +14,7 @@ import re
 import os
 import random
 from modules_add.Cam4 import Cam4_reg as web_reg
+from modules_add.name_get import name_get as ng
 import time
 
 def writelog(runinfo,e=''):
@@ -83,7 +84,7 @@ def Aol_Check(submit,str_1,str_2):
         chrome_driver.close()
         chrome_driver.quit()
         return 1
-    sleep(5*60)     
+    #sleep(3*60)     
     try: 
         chrome_driver.find_element_by_xpath('//*[@id="mod-mail-preview-1"]/div[2]').click()
     except Exception as e:
@@ -108,7 +109,7 @@ def Aol_Check(submit,str_1,str_2):
             sleep(5)
             if chrome_driver.find_element_by_link_text(str_2):
                 chrome_driver.find_element_by_link_text(str_2).click()
-                rantime = random.randint(10,15)
+                rantime = random.randint(2,5)
                 sleep(rantime*60)   
                 chrome_driver.close()
                 chrome_driver.quit()
@@ -130,7 +131,7 @@ def Aol_Check(submit,str_1,str_2):
                 sleep(5)
                 if chrome_driver.find_element_by_link_text(str_2):
                     chrome_driver.find_element_by_link_text(str_2).click()
-                    rantime = random.randint(10,15)
+                    rantime = random.randint(2,5)
                     sleep(rantime*60)   
                     chrome_driver.close()
                     chrome_driver.quit()
@@ -156,6 +157,8 @@ def Aol_Check(submit,str_1,str_2):
     
 if __name__=='__main__':
     submit={}
+    submit['name'] = ng.gen_one_word_digit(lowercase=False)
+    submit['pwd'] = 'AOmOCA5x'
     submit['ua'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36'
     submit['email'] = 'MelissaWilkinsonw@aol.com'
     submit['email_pwd'] = 'AOmOCA5x'

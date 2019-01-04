@@ -10,7 +10,7 @@ def writelog(runinfo,e=''):
 
 
 
-def web_Submit(submit): 
+def web_Submit(submit):
     # path='../driver'
     # executable_path=path
     path_excel = '..\..\cam4\config\c4mconfig.xlsx'
@@ -23,15 +23,15 @@ def web_Submit(submit):
     # ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
     options.add_argument('user-agent="%s"' % ua)
     chrome_driver = webdriver.Chrome(chrome_options=options)
-    print('preparing...')
+    #print('preparing...')
     chrome_driver.implicitly_wait(20)  # 最长等待8秒
-    print('getting site...')
+    #print('getting site...')
     # chrome_driver.get("http://click.prodailyfinance.com/click.php?c=1&key=02q01o3378537qrqy3s9clei")
     chrome_driver.get(site)
     i = 0
     while i <=3:
         if 'Join CAM4' in chrome_driver.title:
-                break
+            break
         else:
             print(chrome_driver.title)
             chrome_driver.get(site)
@@ -81,13 +81,15 @@ def web_Submit(submit):
         sleep(rantime*60)  
         chrome_driver.close()
         chrome_driver.quit()
+        return 1
     else:
         chrome_driver.close()
         chrome_driver.quit()
+        return 0
         # submit['name'] = ng.gen_one_word_digit(lowercase=False)
         # status,submit['name'] = web_Submit(submit)
 
-    return 1
+    
 
 if __name__=='__main__':
     submit={}

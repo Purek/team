@@ -107,7 +107,7 @@ def Gmail_Check(submit,str_1,str_2):
         sleep(10)
         try:
             chrome_driver.find_element_by_link_text(str_2).click()
-            rantime = random.randint(5,10)
+            rantime = random.randint(2,5)
             sleep(rantime*60)
             chrome_driver.close()
             chrome_driver.quit()
@@ -134,7 +134,7 @@ def Gmail_Check(submit,str_1,str_2):
                             print('bbbbbbbbbbbbbbb')
                             # chrome_driver.find_element_by_link_text(str_2).click()
                             print('ccccccccccccccc')
-                            rantime = random.randint(5,10)
+                            rantime = random.randint(2,5)
                             sleep(rantime*60)
                             chrome_driver.close()
                             chrome_driver.quit()

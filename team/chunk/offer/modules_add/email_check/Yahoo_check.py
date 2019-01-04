@@ -84,14 +84,11 @@ def Yahoo_Check(submit,str_1,str_2):
         chrome_driver.quit()
         return 0
         print('into mail from main failed')
-    if 'Yahoo Mail' in chrome_driver.title:
+    if 'overview' in chrome_driver.current_url:
         chrome_driver.close()
         chrome_driver.quit()
         writelog('overview.mail.yahoo.com')
         return -1
-
-
-
     writelog('mail.yahoo.com login successed')
     try:
         flag = web_reg.web_Submit(submit)
@@ -107,7 +104,7 @@ def Yahoo_Check(submit,str_1,str_2):
         chrome_driver.close()
         chrome_driver.quit()
         return 1
-    sleep(5*60)
+    #sleep(1*60)
     try:
         list0 = chrome_driver.find_elements_by_tag_name("button")
         [a.click() for a in list0 if "Done" in str(a.get_attribute('innerText'))]
@@ -123,7 +120,7 @@ def Yahoo_Check(submit,str_1,str_2):
         # chrome_driver.maximize_window()
         if chrome_driver.find_element_by_link_text(str_2):
             chrome_driver.find_element_by_link_text(str_2).click()
-            rantime = random.randint(3,10)
+            rantime = random.randint(3,5)
             sleep(rantime*60)
             chrome_driver.close()
             chrome_driver.quit()
@@ -158,7 +155,7 @@ def Yahoo_Check(submit,str_1,str_2):
                 if chrome_driver.find_element_by_link_text(str_2):
                     print('yes we find cam4 and we are clicking verify')
                     chrome_driver.find_element_by_link_text(str_2).click()
-                    rantime = random.randint(10,15)
+                    rantime = random.randint(3,5)
                     sleep(rantime*60)
                     chrome_driver.close()
                     chrome_driver.quit()
