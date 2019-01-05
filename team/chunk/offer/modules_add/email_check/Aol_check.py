@@ -67,6 +67,13 @@ def Aol_Check(submit,str_1,str_2):
         chrome_driver.close()
         chrome_driver.quit()
         return 0
+    j = 0
+    while chrome_driver.page_source.find('This site can’t be reached')!=-1:
+        chrome_driver.refresh()
+        j += 1
+        if j >= 3:
+            break
+   
     #这里还要再加个判断，用title,这步之后返回都是1和2
     writelog('mail.aol.com login successed')
 

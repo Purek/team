@@ -107,7 +107,7 @@ def choose_Mail():
                     sheet2.write(i,7,city)
                     sheet2.write(i,0,submit['name'])
                     
-                    rantime = random.randint(3,5)
+                    rantime = random.randint(30,50)
                     sleep(rantime*60)
                     print('sleep for %d minutes'%rantime)
                     print('==================')
@@ -133,7 +133,7 @@ def choose_Mail():
                     sheet2.write(i,7,city)
                     sheet2.write(i,6,'success')
                     sheet2.write(i,0,submit['name'])
-                    rantime = random.randint(3,7)
+                    rantime = random.randint(30,50)
                     sleep(rantime*60)                     
                     city,count = ip_test.ip_Test('')
                     flag_ip = 0
@@ -160,7 +160,7 @@ def choose_Mail():
                     sheet2.write(i,7,city)
                     sheet2.write(i,6,'success')
                     sheet2.write(i,0,submit['name'])
-                    rantime = random.randint(2,8)
+                    rantime = random.randint(30,50)
                     sleep(rantime*60)             
                     city,count = ip_test.ip_Test('')
                     flag_ip = 0
