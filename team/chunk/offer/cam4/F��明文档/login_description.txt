@@ -1,0 +1,8 @@
+1.find mission in 'cam4\config\c4mconfig.xlsx',copy
+2.open 'cam4\config\huoyue.xlsx',paste,save and close 
+3.use one row everytime
+4.open 911S5,choose ip which qualify item 'city' in 'cam4\config\huoyue.xlsx' which was just pasted
+5.double click 'Cam4_live.py' to execute your mission.
+
+
+ps:this script is used only to login with cookies.you should click viedos to complete your mission.
