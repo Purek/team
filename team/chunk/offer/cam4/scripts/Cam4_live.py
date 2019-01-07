@@ -35,12 +35,24 @@ def Cam4_live(submit):
         sleep(sleep_time*60)
     return 1
 
-
+def submit_Dict(submit1):
+    submit = {}
+    submit['email'] = submit1[2]
+    submit['ua'] = submit1[5]
+    return submit
 
 
 
 if __name__=='__main__':
-    submit={}
-    submit['email'] = 'LillieHallk@aol.com'
-    submit['ua'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0'
+    path_excel = '..\config\c4mconfig.xlsx'
+    workbook = xlrd.open_workbook(path_excel)
+    sheet = workbook.sheet_by_index(0)
+    rows = sheet.nrows
+    if rows != 2:
+        print('offer\\cam4\\config\\huoyue.xlsx')
+        break
+    submit1 = sheet.row_values(1)
+    submit=submit_Dict(submit1)
+    # submit['email'] = 'LillieHallk@aol.com'
+    # submit['ua'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0'
     Cam4_live(submit)
