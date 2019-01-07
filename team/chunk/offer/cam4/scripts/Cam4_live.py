@@ -29,18 +29,18 @@ def Cam4_live(submit):
         print('find no thanks')
     except:
         print('not find no thanks')
-    randtime = random.randint(3,5)
-    sleep(randtime)
-    time_num =random.randint(3,6)
-    for i in range(time_num):
-        num = random.randint(1,20)
-        try:
-            chrome_driver.find_element_by_xpath('//*[@id="directoryDiv"]/div['+str(num)+']/div/a[2]/').click()
-        except:
-            print('no vedio find')
-        sleep_time = random.randint(1,3)
-        sleep(sleep_time*60)
-    return 1
+    randtime = random.randint(10,15)
+    sleep(randtime*10)
+    # time_num =random.randint(3,6)
+    # for i in range(time_num):
+    #     num = random.randint(1,20)
+    #     try:
+    #         chrome_driver.find_element_by_xpath('//*[@id="directoryDiv"]/div['+str(num)+']/div/a[2]/').click()
+    #     except:
+    #         print('no vedio find')
+    #     sleep_time = random.randint(1,3)
+    #     sleep(sleep_time*60)
+    # return 1
 
 def submit_Dict(submit1):
     submit = {}
