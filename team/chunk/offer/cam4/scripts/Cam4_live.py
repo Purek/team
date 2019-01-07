@@ -55,9 +55,9 @@ if __name__=='__main__':
     workbook = xlrd.open_workbook(path_excel)
     sheet = workbook.sheet_by_index(0)
     rows = sheet.nrows
-    if rows != 2:
-        print('offer\\cam4\\config\\huoyue.xlsx')
-        break
+    # if rows != 2:
+        # print('offer\\cam4\\config\\huoyue.xlsx')
+        # break
     submit1 = sheet.row_values(1)
     submit=submit_Dict(submit1)
     # submit['email'] = 'LillieHallk@aol.com'
