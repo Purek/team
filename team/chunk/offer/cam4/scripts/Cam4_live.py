@@ -24,6 +24,11 @@ def Cam4_live(submit):
         for cookie in cookies:
             chrome_driver.add_cookie(cookie)
     chrome_driver.get('http://www.cam4.com/female')
+    try:
+        chrome_driver.find_element_by_id('promotionConsentModalLink').click()
+        print('find no thanks')
+    except:
+        print('not find no thanks')
     randtime = random.randint(3,5)
     sleep(randtime)
     time_num =random.randint(3,6)
