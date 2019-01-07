@@ -99,7 +99,7 @@ def Aol_Check(submit,str_1,str_2):
         chrome_driver.quit()
         return 1
     #sleep(3*60)  
-    chrome_driver.refresh()   
+    # chrome_driver.refresh()   
     try: 
         chrome_driver.find_element_by_xpath('//*[@id="mod-mail-preview-1"]/div[2]').click()
     except Exception as e:
