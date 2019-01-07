@@ -67,7 +67,6 @@ def ip_Test(city):
         city,totalCount=ip_Test(city)
         return city,totalCount
     else:
-        
         return city,totalCount
 
 if __name__=='__main__':

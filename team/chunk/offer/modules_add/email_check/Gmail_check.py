@@ -14,6 +14,7 @@ import re
 import os
 import random
 from modules_add.Cam4 import Cam4_reg as web_reg
+import json
 
 def writelog(runinfo,e=''):
     file=open(os.getcwd()+"\log.txt",'a+')
@@ -76,6 +77,13 @@ def Gmail_Check(submit,str_1,str_2):
         print('no assistance needed')
     
     writelog('mail.aol.com login successed')
+    cookies = chrome_driver.get_cookies()
+    print(cookies)
+    try:
+        with open('cookies\cookies_email\\gmail\\'+submit['email']+".txt",'w') as fp:
+            json.dump(cookies, fp) 
+    except Exception as e:
+        print(str(e))
     try:
         flag = web_reg.web_Submit(submit)
         if flag == 0:
@@ -109,6 +117,13 @@ def Gmail_Check(submit,str_1,str_2):
             chrome_driver.find_element_by_link_text(str_2).click()
             rantime = random.randint(2,5)
             sleep(rantime*60)
+            #add logic,save cookies to floder cookies
+            chrome_driver.get("http://www.cam4.com/female")
+            sleep(10)
+            cookies = chrome_driver.get_cookies()
+            print(cookies)
+            with open('cookies\cookies_cam4\\'+submit['email']+".txt",'w') as fp:
+                json.dump(cookies, fp) 
             chrome_driver.close()
             chrome_driver.quit()
             return 2
@@ -136,6 +151,13 @@ def Gmail_Check(submit,str_1,str_2):
                             print('ccccccccccccccc')
                             rantime = random.randint(2,5)
                             sleep(rantime*60)
+                            #add logic,save cookies to floder cookies
+                            chrome_driver.get("http://www.cam4.com/female")
+                            sleep(10)
+                            cookies = chrome_driver.get_cookies()
+                            print(cookies)
+                            with open('cookies\cookies_cam4\\'+submit['email']+".txt",'w') as fp:
+                                json.dump(cookies, fp)                             
                             chrome_driver.close()
                             chrome_driver.quit()
                             return 2

@@ -16,6 +16,8 @@ import random
 from modules_add.Cam4 import Cam4_reg as web_reg
 from modules_add.name_get import name_get as ng
 import time
+import json
+
 
 def writelog(runinfo,e=''):
     file=open(os.getcwd()+"\log.txt",'a+')
@@ -57,7 +59,12 @@ def Aol_Check(submit,str_1,str_2):
         chrome_driver.close()
         chrome_driver.quit()
         return 0
-
+    cookies = chrome_driver.get_cookies()
+    try:
+        with open('cookies\cookies_email\\aol\\'+submit['email']+".txt",'w') as fp:
+            json.dump(cookies, fp) 
+    except Exception as e:
+        print(str(e))
     try:
         chrome_driver.find_element_by_css_selector('#mod-mail-preview-1 > div.navicon.navicon-mail').click()
         #chrome_driver.find_element_by_xpath('//*[@id="navigation-menu-channels"]/div/ul/li[2]/a')
@@ -117,7 +124,14 @@ def Aol_Check(submit,str_1,str_2):
             if chrome_driver.find_element_by_link_text(str_2):
                 chrome_driver.find_element_by_link_text(str_2).click()
                 rantime = random.randint(2,5)
-                sleep(rantime*60)   
+                sleep(rantime*60)
+                #add logic,save cookies to floder cookies
+                chrome_driver.get("http://www.cam4.com/female")
+                sleep(10)
+                cookies = chrome_driver.get_cookies()
+                print(cookies)
+                with open('cookies\cookies_cam4\\'+submit['email']+".txt",'w') as fp:
+                    json.dump(cookies, fp) 
                 chrome_driver.close()
                 chrome_driver.quit()
                 return 2
@@ -139,7 +153,13 @@ def Aol_Check(submit,str_1,str_2):
                 if chrome_driver.find_element_by_link_text(str_2):
                     chrome_driver.find_element_by_link_text(str_2).click()
                     rantime = random.randint(2,5)
-                    sleep(rantime*60)   
+                    sleep(rantime*60)  
+                    chrome_driver.get("http://www.cam4.com/female")
+                    sleep(10)
+                    cookies = chrome_driver.get_cookies()
+                    print(cookies)
+                    with open('cookies\cookies_cam4\\'+submit['email']+".txt", 'w') as fp:
+                        json.dump(cookies, fp) 
                     chrome_driver.close()
                     chrome_driver.quit()
                     return 2
