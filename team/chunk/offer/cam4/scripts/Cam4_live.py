@@ -5,6 +5,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 import random
 import json
+import xlrd
+
 
 
 
@@ -44,7 +46,7 @@ def submit_Dict(submit1):
 
 
 if __name__=='__main__':
-    path_excel = '..\config\c4mconfig.xlsx'
+    path_excel = '..\config\huoyue.xlsx'
     workbook = xlrd.open_workbook(path_excel)
     sheet = workbook.sheet_by_index(0)
     rows = sheet.nrows
