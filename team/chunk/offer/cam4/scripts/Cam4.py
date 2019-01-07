@@ -13,6 +13,7 @@ from modules_add.ip_test import ip_test
 from modules_add.email_check import Aol_check 
 from modules_add.email_check import Gmail_check 
 from modules_add.email_check import Yahoo_check 
+import json
 
 # path_excel = '..\config\c4mconfig.xlsx'
 # workbook = xlrd.open_workbook(path_excel)
@@ -106,7 +107,6 @@ def choose_Mail():
                     sheet2.write(i,6,'success')
                     sheet2.write(i,7,city)
                     sheet2.write(i,0,submit['name'])
-                    
                     rantime = random.randint(30,50)
                     sleep(rantime*60)
                     print('sleep for %d minutes'%rantime)
