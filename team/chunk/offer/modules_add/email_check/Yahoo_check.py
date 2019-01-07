@@ -149,6 +149,7 @@ def Yahoo_Check(submit,str_1,str_2):
         chrome_driver.quit()
         return 1
     #sleep(1*60)
+    chrome_driver.refresh()
     try:
         list0 = chrome_driver.find_elements_by_tag_name("button")
         [a.click() for a in list0 if "Done" in str(a.get_attribute('innerText'))]
