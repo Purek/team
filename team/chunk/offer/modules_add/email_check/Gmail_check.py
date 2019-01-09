@@ -75,7 +75,20 @@ def Gmail_Check(submit,str_1,str_2):
         chrome_driver.find_element_by_class_name('U26fgb').send_keys(Keys.ENTER)
     except Exception as e:
         print('no assistance needed')
-    
+
+    j = 0
+    while chrome_driver.page_source.find('This site can’t be reached')!=-1:
+        chrome_driver.refresh()
+        j += 1
+        if j >= 3:
+            break
+   
+    if chrome_driver.page_source.find('This site can’t be reached')!=-1:
+        chrome_driver.close()
+        chrome_driver.quit()
+        return 0   
+
+
     writelog('mail.aol.com login successed')
     cookies = chrome_driver.get_cookies()
     print(cookies)
@@ -127,7 +140,7 @@ def Gmail_Check(submit,str_1,str_2):
                 json.dump(cookies, fp) 
             chrome_driver.close()
             chrome_driver.quit()
-            return 2
+            return 3
         except Exception as e:
             print('goto more')
             list2 = chrome_driver.find_elements_by_tag_name('span')
@@ -161,31 +174,31 @@ def Gmail_Check(submit,str_1,str_2):
                                 json.dump(cookies, fp)                             
                             chrome_driver.close()
                             chrome_driver.quit()
-                            return 2
+                            return 3
                         except Exception as e:
                             writelog('verify failed with error:',str(e))
                             chrome_driver.close()
                             chrome_driver.quit()
-                            return 1
+                            return 2
                     except Exception as e:
                         chrome_driver.close()
                         chrome_driver.quit()
-                        return 1     
+                        return 2     
                 except Exception as e:
                     print('no spam')
                     chrome_driver.close()
                     chrome_driver.quit()
-                    return 1
+                    return 2
             except Exception as e:
                 print('cant find more')
                 chrome_driver.close()
                 chrome_driver.quit()
-                return 1
+                return 2
     except Exception as e:
         print('cam4 not received')
         chrome_driver.close()
         chrome_driver.quit()
-        return 1
+        return 2
     
 
 if __name__=='__main__':

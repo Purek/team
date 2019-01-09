@@ -64,6 +64,8 @@ def web_Submit(submit):
     sleep(rantime)   
     chrome_driver.find_element_by_xpath("//*[@id='email']").send_keys(submit['email'])
     sleep(3)
+    title = chrome_driver.title
+    url = chrome_driver.current_url
     try:
         chrome_driver.find_element_by_xpath("//*[@id='paymentForm']/a/span").click()
     except Exception as e:
@@ -75,7 +77,7 @@ def web_Submit(submit):
     # print(chrome_driver.page_source)
     status = 'fail'
     sleep(3)
-    if chrome_driver.page_source.find('Please verify your email address to complete your registration') != -1:
+    if chrome_driver.title != title or chrome_driver.url != url:
         status = 'success'
         rantime = random.randint(3,5)
         sleep(rantime*60)  

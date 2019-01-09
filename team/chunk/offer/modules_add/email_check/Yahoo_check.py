@@ -111,6 +111,20 @@ def Yahoo_Check(submit,str_1,str_2):
     sleep(2)
     chrome_driver.find_element_by_id('login-signin').click()
     sleep(5)
+
+    j = 0
+    while chrome_driver.page_source.find('This site can’t be reached')!=-1:
+        chrome_driver.refresh()
+        j += 1
+        if j >= 3:
+            break
+   
+    if chrome_driver.page_source.find('This site can’t be reached')!=-1:
+        chrome_driver.close()
+        chrome_driver.quit()
+        return 0  
+
+
     # save cookies
     cookies = chrome_driver.get_cookies()
     print(cookies)
@@ -132,8 +146,24 @@ def Yahoo_Check(submit,str_1,str_2):
         chrome_driver.quit()
         writelog('overview.mail.yahoo.com')
         return -1
+
+    j = 0
+    while chrome_driver.page_source.find('This site can’t be reached')!=-1:
+        chrome_driver.refresh()
+        j += 1
+        if j >= 3:
+            break
+   
+    if chrome_driver.page_source.find('This site can’t be reached')!=-1:
+        chrome_driver.close()
+        chrome_driver.quit()
+        return 0   
+
+
     writelog('mail.yahoo.com login successed')
 
+
+# login success
     try:
         flag = web_reg.web_Submit(submit)
         if flag == 0:
@@ -170,13 +200,20 @@ def Yahoo_Check(submit,str_1,str_2):
             #add logic,save cookies to floder cookies
             chrome_driver.get("http://www.cam4.com/female")
             sleep(10)
-            cookies = chrome_driver.get_cookies()
-            print(cookies)
-            with open('cookies\cookies_cam4\\'+submit['email']+".txt",'w') as fp:
-                json.dump(cookies, fp) 
+            j = 0
+            while chrome_driver.page_source.find('This site can’t be reached')!=-1:
+                chrome_driver.refresh()
+                j += 1
+                if j > 3:
+                    break            
+            if chrome_driver.page_source.find('This site can’t be reached')==-1:                
+                cookies = chrome_driver.get_cookies()
+                print(cookies)
+                with open('cookies\cookies_cam4\\'+submit['email']+".txt",'w') as fp:
+                    json.dump(cookies, fp) 
             chrome_driver.close()
             chrome_driver.quit()
-            return 2
+            return 3
     except:
         print("can't find verify button")
         # spam
@@ -212,26 +249,33 @@ def Yahoo_Check(submit,str_1,str_2):
                     #add logic,save cookies to floder cookies
                     chrome_driver.get("http://www.cam4.com/female")
                     sleep(10)
-                    cookies = chrome_driver.get_cookies()
-                    print(cookies)
-                    with open('cookies\cookies_cam4\\'+submit['email']+".txt",'w') as fp:
-                        json.dump(cookies, fp)                      
+                    j = 0
+                    while chrome_driver.page_source.find('This site can’t be reached')!=-1:
+                        chrome_driver.refresh()
+                        j += 1
+                        if j > 3:
+                            break
+                    if chrome_driver.page_source.find('This site can’t be reached')==-1:                
+                        cookies = chrome_driver.get_cookies()
+                        print(cookies)
+                        with open('cookies\cookies_cam4\\'+submit['email']+".txt",'w') as fp:
+                            json.dump(cookies, fp)                     
                     chrome_driver.close()
                     chrome_driver.quit()
-                    return 2
+                    return 3
             except:
                 print("can't find verify button")
                 chrome_driver.save_screenshot(submit['name']+'.png')
                 # sleep(5)
                 chrome_driver.close()
                 chrome_driver.quit()
-                return 1
+                return 2
         except:
             print('inbox not found')
             chrome_driver.save_screenshot(submit['name']+'.png')
             chrome_driver.close()
             chrome_driver.quit()
-            return 1
+            return 2
 
 
 

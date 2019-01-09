@@ -97,20 +97,22 @@ def choose_Mail():
                 flag = Aol_check.Aol_Check(submit,'Cam4','Verify Your Account')
                 print(flag)
                 if flag == 0:
-                    sheet2.write(i,6,'login failed or registerd')
+                    sheet2.write(i,6,'email login failed')
                     flag_ip = flag_ip + 1
                 elif flag == 1:
-                    sheet2.write(i,6,'login success but verify failed')
-                    sheet2.write(i,7,city)
-                    sheet2.write(i,0,'bademail')
+                    sheet2.write(i,6,'register failed')
+                elif flag == 2:
+                    sheet2.write(i,6,'verify failed')
+                    flag_ip = 10
+                    sheet2.write(i,0,'bad email')
                 else:
                     sheet2.write(i,6,'success')
                     sheet2.write(i,7,city)
                     sheet2.write(i,0,submit['name'])
                     rantime = random.randint(30,50)
-                    sleep(rantime*60)
                     print('sleep for %d minutes'%rantime)
-                    print('==================')
+                    print('==================')                
+                    sleep(rantime*60)
                     city,count = ip_test.ip_Test('')
                     flag_ip = 0
             except Exception as e:
@@ -123,18 +125,22 @@ def choose_Mail():
                 flag = Yahoo_check.Yahoo_Check(submit,'Cam4','Verify Your Account')
                 print(flag)
                 if flag == 0:
-                    sheet2.write(i,6,'login failed or registerd')
+                    sheet2.write(i,6,'email login failed')
                     flag_ip = flag_ip + 1
                 elif flag == 1:
-                    sheet2.write(i,6,'login success but verify failed')
-                    sheet2.write(i,0,'bademail')
-                    sheet2.write(i,7,city)
+                    sheet2.write(i,6,'register failed')
                 elif flag == 2:
-                    sheet2.write(i,7,city)
+                    sheet2.write(i,6,'verify failed')
+                    flag_ip = 10
+                    sheet2.write(i,0,'bad email')
+                elif flag == 3:
                     sheet2.write(i,6,'success')
+                    sheet2.write(i,7,city)
                     sheet2.write(i,0,submit['name'])
                     rantime = random.randint(30,50)
-                    sleep(rantime*60)                     
+                    print('sleep for %d minutes'%rantime)
+                    print('==================')                
+                    sleep(rantime*60)
                     city,count = ip_test.ip_Test('')
                     flag_ip = 0
                 else:
@@ -150,18 +156,22 @@ def choose_Mail():
                 flag = Gmail_check.Gmail_Check(submit,'Cam4','Verify Your Account')
                 print(flag)
                 if flag == 0:
-                    sheet2.write(i,6,'login failed')
+                    sheet2.write(i,6,'email login failed')
                     flag_ip = flag_ip + 1
                 elif flag == 1:
-                    sheet2.write(i,6,'login success but verify failed')
-                    sheet2.write(i,7,city)
-                    sheet2.write(i,0,'bademail')
+                    sheet2.write(i,6,'register failed')
+                elif flag == 2:
+                    sheet2.write(i,6,'verify failed')
+                    flag_ip = 10
+                    sheet2.write(i,0,'bad email')
                 else:
-                    sheet2.write(i,7,city)
                     sheet2.write(i,6,'success')
+                    sheet2.write(i,7,city)
                     sheet2.write(i,0,submit['name'])
                     rantime = random.randint(30,50)
-                    sleep(rantime*60)             
+                    print('sleep for %d minutes'%rantime)
+                    print('==================')                
+                    sleep(rantime*60)
                     city,count = ip_test.ip_Test('')
                     flag_ip = 0
             except Exception as e:
