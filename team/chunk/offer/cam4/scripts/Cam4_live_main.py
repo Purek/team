@@ -33,16 +33,17 @@ def submit_Dict(submit1):
 
 
 def get_Account():
-    path_excel = '..\config\huoyue.xlsx'
+    path_excel = '..\config\c4mconfig.xlsx'
     workbook = xlrd.open_workbook(path_excel)
     sheet = workbook.sheet_by_index(0)
     rows = sheet.nrows
     print(rows)
     list_rows = random.sample(range(rows),rows)
+    list_rows2 = [x for x in list_rows if sheet.row_values(x)[6] == 'success']
     print(list_rows)
     live_num = random.randint(10,20)  
     flag_live_num = 0
-    for i in list_rows:
+    for i in list_rows2:
         if i == 0:
             continue
         flag_live_num += 1
