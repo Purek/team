@@ -37,7 +37,8 @@ def Cam4_live(submit):
         try:
             chrome_driver.find_element_by_xpath('//*[@id="directoryDiv"]/div['+str(num)+']/div/a[2]').click()
             # //*[@id="directoryDiv"]/div[1]/div/a[2]
-            chrome_driver.get('http://www.cam4.com/female')            
+            chrome_driver.get('http://www.cam4.com/female')
+            print('asdasdasdasd')            
         except:
             chrome_driver.get('http://www.cam4.com/female')
             print('no vedio find')
