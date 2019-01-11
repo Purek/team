@@ -7,6 +7,7 @@ import os
 import time
 from modules_add.Cam4 import Cam4_live as live
 from modules_add.ip_test import ip_test
+from time import sleep
 
 
 def writelog(runinfo,e=''):
