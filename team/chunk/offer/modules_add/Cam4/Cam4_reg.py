@@ -2,6 +2,7 @@ from selenium import webdriver
 from time import sleep
 import xlrd
 import random
+import os
 
 def writelog(runinfo,e=''):
     file=open(os.getcwd()+"\log.txt",'a+')
@@ -76,6 +77,7 @@ def web_Submit(submit):
     writelog(url)
     try:
         chrome_driver.find_element_by_xpath("//*[@id='paymentForm']/a/span").click()
+
     except Exception as e:
         writelog('form in a bad shape',e)
         chrome_driver.close()
