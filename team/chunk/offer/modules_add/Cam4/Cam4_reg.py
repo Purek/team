@@ -23,9 +23,9 @@ def web_Submit(submit):
     # ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
     options.add_argument('user-agent="%s"' % ua)
     chrome_driver = webdriver.Chrome(chrome_options=options)
-    #print('preparing...')
+    #writelog('preparing...')
     chrome_driver.implicitly_wait(20)  # 最长等待8秒
-    #print('getting site...')
+    #writelog('getting site...')
     # chrome_driver.get("http://click.prodailyfinance.com/click.php?c=1&key=02q01o3378537qrqy3s9clei")
     chrome_driver.get(site)
     i = 0
@@ -33,7 +33,7 @@ def web_Submit(submit):
         if 'Join CAM4' in chrome_driver.title:
             break
         else:
-            print(chrome_driver.title)
+            writelog(chrome_driver.title)
             chrome_driver.get(site)
             sleep(5)
             i = i + 1   
@@ -50,31 +50,39 @@ def web_Submit(submit):
         chrome_driver.close()
         chrome_driver.quit()
         return 0
-    chrome_driver.find_element_by_xpath("/html/body/div[1]/div[2]/div/div[1]").click()      #question2
-    chrome_driver.find_element_by_xpath("/html/body/div[1]/div[3]/div/div[1]").click()      #question3
-    chrome_driver.find_element_by_xpath("/html/body/div[1]/div[4]/span").click()            #create account
+    try:
+        chrome_driver.find_element_by_xpath("/html/body/div[1]/div[2]/div/div[1]").click()      #question2
+        chrome_driver.find_element_by_xpath("/html/body/div[1]/div[3]/div/div[1]").click()      #question3
+        chrome_driver.find_element_by_xpath("/html/body/div[1]/div[4]/span").click()            #create account
+        sleep(3)
+        chrome_driver.switch_to_frame('myForm')
+        chrome_driver.find_element_by_xpath("//*[@id='userName']").send_keys(submit['name'])
+        rantime = random.randint(3,5)
+        sleep(rantime)   
+        chrome_driver.find_element_by_xpath("//*[@id='newPassword']").send_keys(submit['pwd'])
+        rantime = random.randint(3,5)
+        sleep(rantime)   
+        chrome_driver.find_element_by_xpath("//*[@id='email']").send_keys(submit['email'])
+    except:
+        writelog('something error in registration',e)
+        chrome_driver.close()
+        chrome_driver.quit()
+        return 0
 
     sleep(3)
-    chrome_driver.switch_to_frame('myForm')
-    chrome_driver.find_element_by_xpath("//*[@id='userName']").send_keys(submit['name'])
-    rantime = random.randint(3,5)
-    sleep(rantime)   
-    chrome_driver.find_element_by_xpath("//*[@id='newPassword']").send_keys(submit['pwd'])
-    rantime = random.randint(3,5)
-    sleep(rantime)   
-    chrome_driver.find_element_by_xpath("//*[@id='email']").send_keys(submit['email'])
-    sleep(3)
     title = chrome_driver.title
+    writelog(title)
     url = chrome_driver.current_url
+    writelog(url)
     try:
         chrome_driver.find_element_by_xpath("//*[@id='paymentForm']/a/span").click()
     except Exception as e:
         writelog('form in a bad shape',e)
         chrome_driver.close()
         chrome_driver.quit()
-        print('form not ok')
+        writelog('form not ok')
         return 0
-    # print(chrome_driver.page_source)
+    # writelog(chrome_driver.page_source)
     status = 'fail'
     sleep(3)
     if chrome_driver.title != title or chrome_driver.url != url:
