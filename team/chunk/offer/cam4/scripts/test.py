@@ -23,16 +23,19 @@ sys.path.append("../..")
 # test(submit)
 import json
 import os
+import random
 
 
 
-with open('cookies\\'+"aol@hotmail.txt", 'r') as fp:
-    cookies = json.load(fp)
+# with open('cookies\\'+"aol@hotmail.txt", 'r') as fp:
+#     cookies = json.load(fp)
+num = random.randint(1,20)
+a = '//*[@id="directoryDiv"]/div['+str(num)+']/div/a[2]'
+print(a)
 
-
-print(cookies)
-with open('cookies\cookies_email\\'+"1.com.txt", 'w') as fp:
-    json.dump(cookies, fp) 
+# print(cookies)
+# with open('cookies\cookies_email\\'+"1.com.txt", 'w') as fp:
+#     json.dump(cookies, fp) 
 
 # dir1 = os.path.abspath('')
 # dir2 = dir1 + '\cookies_email\\aol\\'

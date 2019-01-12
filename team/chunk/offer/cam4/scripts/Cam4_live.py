@@ -44,6 +44,8 @@ def Cam4_live(submit):
             print('no vedio find')
         sleep_time = random.randint(1,3)
         sleep(sleep_time*60)
+    chrome_driver.close()
+    chrome_driver.quit()
     return 1
 
 def submit_Dict(submit1):
