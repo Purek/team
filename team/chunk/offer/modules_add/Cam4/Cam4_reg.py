@@ -3,6 +3,7 @@ from time import sleep
 import xlrd
 import random
 import os
+import time
 
 def writelog(runinfo,e=''):
     file=open(os.getcwd()+"\log.txt",'a+')
