@@ -92,6 +92,20 @@ def Yahoo_Check(submit,str_1,str_2):
         chrome_driver.quit()
         return 0
         print('cannot find singin by id')
+
+    j = 0
+    while chrome_driver.page_source.find('This site can’t be reached')!=-1:
+        chrome_driver.refresh()
+        j += 1
+        if j >= 3:
+            break
+   
+    if chrome_driver.page_source.find('This site can’t be reached')!=-1:
+        chrome_driver.close()
+        chrome_driver.quit()
+        return 0  
+
+
     # 登陆
     chrome_driver.find_element_by_id('login-username').send_keys(submit['email'])
     try:
