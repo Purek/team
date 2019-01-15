@@ -96,27 +96,34 @@ def Gmail_Check(submit,str_1,str_2):
             chrome_driver.quit()
             return 1
         else:
+            print('========================')
             writelog('register success')
     except Exception as e:
         writelog('register failed with error:',str(e))
+        print('eeeeeeeeeeeeeeeeeeeeeeeeee')
         chrome_driver.close()
         chrome_driver.quit()
         return 1
     # sleep(5*60)
     # chrome_driver.refresh()
+    print('fffffffffffffffffffffffff')
     try:
         chrome_driver.find_element_by_name('welcome_dialog_next').click()
         chrome_driver.find_element_by_name('ok').click()
+        print('into gmail ok')
     except Exception as e:
         print('no next')
 
     try:
-        chrome_driver.find_element_by_css_selector('[data-tooltip = "Inbox"').click()   
+        chrome_driver.find_element_by_css_selector('[data-tooltip = "Inbox"').click()
+        print('aaaaaaaaaaaaaaaaaaaaaaa')
     except Exception as e:
         print('ok')
+        print('bbbbbbbbbbbbbbbbbbbb')
     try:
         list1 = chrome_driver.find_elements_by_tag_name('tr')
         [a.click() for a in list1 if str_1 in str(a.get_attribute('innerText'))]
+        print('cccccccccccccccccccccccccccccccc')
         sleep(10)
         try:
             chrome_driver.find_element_by_link_text(str_2).click()

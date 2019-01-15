@@ -139,3 +139,88 @@ account 12 start
 2019-01-06 15:24:02 : 
 account 34 start
 
+2019-01-14 06:28:16 : 
+account 66 start
+
+2019-01-14 06:31:44 : 
+login return with error
+[Errno 2] No such file or directory: 'cookies\\cookies_cam4\\LanetteRowell47@aol.com.txt'
+2019-01-14 06:31:44 : 
+1: Joaquin81620
+
+2019-01-14 09:35:30 : 
+account 16 start
+
+2019-01-14 09:39:08 : 
+login return with error
+[Errno 2] No such file or directory: 'cookies\\cookies_cam4\\alejandro.cooleyz5@yahoo.com.txt'
+2019-01-14 09:39:08 : 
+1: Tadhg946120
+
+2019-01-14 09:44:08 : 
+account 45 start
+
+2019-01-14 22:46:31 : 
+account 99 start
+
+2019-01-14 22:47:25 : 
+account 148 start
+
+2019-01-14 22:50:17 : 
+login return with error
+Message: unable to set cookie
+  (Session info: chrome=71.0.3578.98)
+  (Driver info: chromedriver=2.45.615291 (ec3682e3c9061c10f26ea9e5cdcf3c53f3f74387),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+2019-01-14 22:50:17 : 
+1: Said86210
+
+2019-01-14 22:54:17 : 
+account 121 start
+
+2019-01-14 22:56:02 : 
+login return with error
+[Errno 2] No such file or directory: 'cookies\\cookies_cam4\\NathanPrattlC@yahoo.com.txt'
+2019-01-14 22:56:02 : 
+2: Ivor42790
+
+2019-01-14 23:00:02 : 
+account 78 start
+
+2019-01-14 23:05:29 : 
+login return with error
+[Errno 2] No such file or directory: 'cookies\\cookies_cam4\\GaryYostP5@aol.com.txt'
+2019-01-14 23:05:29 : 
+3: Zuriel140
+
+2019-01-14 23:10:29 : 
+account 140 start
+
+2019-01-14 23:12:11 : 
+login return with error
+[Errno 2] No such file or directory: 'cookies\\cookies_cam4\\ira.wyattrj@yahoo.com.txt'
+2019-01-14 23:12:11 : 
+4: Karla8866580
+
+2019-01-14 23:15:11 : 
+account 157 start
+
+2019-01-14 23:35:01 : 
+5: Lettie9575241
+
+2019-01-14 23:40:01 : 
+account 123 start
+
+2019-01-15 00:02:46 : 
+login return with error
+Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=71.0.3578.98)
+  (Driver info: chromedriver=2.45.615291 (ec3682e3c9061c10f26ea9e5cdcf3c53f3f74387),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+2019-01-15 00:02:46 : 
+6: Mick5440
+
+2019-01-15 00:06:46 : 
+account 159 start
+

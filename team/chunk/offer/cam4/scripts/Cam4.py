@@ -65,19 +65,26 @@ def choose_Mail():
     print(rows)
     list_rows = random.sample(range(rows),rows)
     print(list_rows)
-    site = sheet.cell(1,8).value
+    # site = sheet.cell(1,8).value
+    site = 'www.baidu.com'
     print(site)
     # submit = {}
     #every five times not access to email,chang ip,record with flag_ip
     #everytime chang ip,reset flag_ip
     flag = 0
     city,count = ip_test.ip_Test('')
+    if count == -1:
+        writelog('911 wrong for 4 times')
+        return
     print('==================')
     flag_ip = 0
     for i in list_rows:
         print(i)
         if flag_ip >= 3:
             city,count = ip_test.ip_Test('')
+            if count == -1:
+                writelog('911 wrong for 4 times')
+                return
             flag_ip = 0
         workbook = xlrd.open_workbook(path_excel)
         sheet = workbook.sheet_by_index(0)
@@ -109,15 +116,20 @@ def choose_Mail():
                     sheet2.write(i,6,'success')
                     sheet2.write(i,7,city)
                     sheet2.write(i,0,submit['name'])
-                    rantime = random.randint(30,50)
+                    rantime = random.randint(20,30)
                     print('sleep for %d minutes'%rantime)
                     print('==================')                
                     sleep(rantime*60)
                     city,count = ip_test.ip_Test('')
+                    if count == -1:
+                        writelog('911 wrong for 4 times')
+                        return    
                     flag_ip = 0
+                book2.save('..\config\c4mconfig.xlsx')
             except Exception as e:
                 sheet2.write(i,6,'login failed or registerd')
-                writelog('aol login error',str(e))     
+                writelog('aol login error',str(e))   
+                book2.save('..\config\c4mconfig.xlsx')  
         elif 'yahoo.com' in submit['email']:
             print('yahoo')
             try:
@@ -137,18 +149,23 @@ def choose_Mail():
                     sheet2.write(i,6,'success')
                     sheet2.write(i,7,city)
                     sheet2.write(i,0,submit['name'])
-                    rantime = random.randint(30,50)
+                    rantime = random.randint(20,30)
                     print('sleep for %d minutes'%rantime)
                     print('==================')                
                     sleep(rantime*60)
                     city,count = ip_test.ip_Test('')
+                    if count == -1:
+                        writelog('911 wrong for 4 times')
+                        return                
                     flag_ip = 0
                 else:
                     sheet2.write(i,6,'overview yahoo')
                     sheet2.write(i,0,'bademail')
+                book2.save('..\config\c4mconfig.xlsx')
             except Exception as e:
                 sheet2.write(i,6,'login failed')
-                writelog('yahoo login error',str(e))     
+                writelog('yahoo login error',str(e)) 
+                book2.save('..\config\c4mconfig.xlsx')    
         elif 'gmail' in submit['email']:
             print('gmail')
             try:
@@ -168,17 +185,21 @@ def choose_Mail():
                     sheet2.write(i,6,'success')
                     sheet2.write(i,7,city)
                     sheet2.write(i,0,submit['name'])
-                    rantime = random.randint(30,50)
+                    rantime = random.randint(20,30)
                     print('sleep for %d minutes'%rantime)
                     print('==================')                
                     sleep(rantime*60)
                     city,count = ip_test.ip_Test('')
+                    if count == -1:
+                        writelog('911 wrong for 4 times')
+                        book2.save('..\config\c4mconfig.xlsx')
+                        return                    
                     flag_ip = 0
+                book2.save('..\config\c4mconfig.xlsx')
             except Exception as e:
                 sheet2.write(i,6,'login failed')
                 writelog('gmail login error',str(e))   
-        book2.save('..\config\c4mconfig.xlsx')
-        print('成功保存')                
+                book2.save('..\config\c4mconfig.xlsx')              
 
 
 if __name__=='__main__':
