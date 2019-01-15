@@ -26,7 +26,7 @@ def web_Submit(submit):
     options.add_argument('user-agent="%s"' % ua)
     chrome_driver = webdriver.Chrome(chrome_options=options)
     #writelog('preparing...')
-    # chrome_driver.implicitly_wait(20)  # 最长等待8秒
+    chrome_driver.implicitly_wait(20)  # 最长等待8秒
     #writelog('getting site...')
     # chrome_driver.get("http://click.prodailyfinance.com/click.php?c=1&key=02q01o3378537qrqy3s9clei")
     chrome_driver.get(site)

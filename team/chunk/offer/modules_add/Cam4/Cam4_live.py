@@ -16,6 +16,7 @@ def Cam4_live(submit):
     options.add_argument('user-agent="%s"' % ua)
     options.add_argument("--disable-infobars")
     chrome_driver = webdriver.Chrome(chrome_options=options)
+    chrome_driver.implicitly_wait(20)
     chrome_driver.get('http://www.cam4.com/female')
     with open('cookies\cookies_cam4\\'+submit['email']+".txt", 'r') as fp:
         cookies = json.load(fp)

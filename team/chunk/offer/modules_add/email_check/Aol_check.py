@@ -35,7 +35,7 @@ def Aol_Check(submit,str_1,str_2):
     options.add_argument('user-agent="%s"' % ua)
     options.add_argument("--disable-infobars")
     chrome_driver = webdriver.Chrome(chrome_options=options)
-    # chrome_driver.implicitly_wait(20)  # 最长等待8秒
+    chrome_driver.implicitly_wait(20)  # 最长等待8秒
     chrome_driver.get("https://login.aol.com")
     i = 0
     while i <=3:
