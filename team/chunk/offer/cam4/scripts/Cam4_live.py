@@ -57,16 +57,17 @@ def submit_Dict(submit1):
 
 
 if __name__=='__main__':
-    # path_excel = '..\config\huoyue.xlsx'
-    # workbook = xlrd.open_workbook(path_excel)
-    # sheet = workbook.sheet_by_index(0)
-    # rows = sheet.nrows
-    # # if rows != 2:
-    #     # print('offer\\cam4\\config\\huoyue.xlsx')
-    #     # break
-    # submit1 = sheet.row_values(1)
-    # submit=submit_Dict(submit1)
-    submit = {}
-    submit['email'] = 'LillieHallk@aol.com'
-    submit['ua'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0'
+    path_excel = '..\\config\\huoyue.xlsx'
+    workbook = xlrd.open_workbook(path_excel)
+    sheet = workbook.sheet_by_index(0)
+    rows = sheet.nrows
+    print(rows)
+    # if rows != 2:
+        # print('offer\\cam4\\config\\huoyue.xlsx')
+        # break
+    submit1 = sheet.row_values(1)
+    submit=submit_Dict(submit1)
+    # submit = {}
+    # submit['email'] = 'LillieHallk@aol.com'
+    # submit['ua'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0'
     Cam4_live(submit)
