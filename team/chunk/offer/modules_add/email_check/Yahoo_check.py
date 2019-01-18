@@ -52,7 +52,7 @@ def Yahoo_Check(submit,str_1,str_2):
             chrome_driver.close()
             chrome_driver.quit()
             return 0
-        sleep(500)
+        #sleep(500)
         chrome_driver.find_element_by_id('uh-signin').click()
         print('click singin ok')
     except:
