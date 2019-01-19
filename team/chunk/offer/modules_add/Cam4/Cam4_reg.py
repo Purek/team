@@ -55,7 +55,14 @@ def web_Submit(submit):
     try:
         chrome_driver.find_element_by_xpath("/html/body/div[1]/div[2]/div/div[1]").click()      #question2
         chrome_driver.find_element_by_xpath("/html/body/div[1]/div[3]/div/div[1]").click()      #question3
-        chrome_driver.find_element_by_xpath("/html/body/div[1]/div[4]/span").click()            #create account
+        chrome_driver.find_element_by_xpath("/html/body/div[1]/div[4]/span").click()
+    except:
+        print('...')
+        writelog('something error in registration',e)
+        chrome_driver.close()
+        chrome_driver.quit()
+        return 0        
+    try:                    #create account
         sleep(3)
         chrome_driver.switch_to_frame('myForm')
         chrome_driver.find_element_by_xpath("//*[@id='userName']").send_keys(submit['name'])
